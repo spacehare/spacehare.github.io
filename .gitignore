@@ -1,1 +1,4 @@
-.vscode
+# .vscode
+node_modules
+playing
+*js.map

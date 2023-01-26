@@ -1,7 +1,8 @@
 import json
 import regex
 
-PATH: str = 'techdc'
+
+PATH: str = 'resources'
 # sizes
 LARGE: int = 64
 SMALL: int = 32

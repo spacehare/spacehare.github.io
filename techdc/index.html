@@ -1,18 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
 	<!-- PyScript -->
 	<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
 	<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-	<py-config>
-		packages = ['regex']
-		[[fetch]]
-		files = ['./techdc/techdc_large_A.txt',
-		'./techdc/techdc_small_A.txt',
-		'./techdc/techdc.json',
-		'./techdc.py']
-	</py-config>
+	<py-config src="techdc.toml"></py-config>
 	<!-- normal stuff -->
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />

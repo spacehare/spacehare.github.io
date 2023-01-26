@@ -1,0 +1,8 @@
+packages = ['regex']
+[[fetch]]
+files = [
+	'resources/techdc_large_A.txt',
+	'resources/techdc_small_A.txt',
+	'resources/techdc.json',
+	'techdc.py',
+]
