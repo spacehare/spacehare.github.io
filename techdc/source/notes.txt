@@ -1,0 +1,9 @@
+dropdown for color
+
+resources located in /techdc
+
+for COLOR and STYLE replacement
+	STRING
+	(\n)|(grey2)|(\d(?=_))
+	SUB
+	${1:+\\n}${2:+COLOR}${3:+STYLE}
