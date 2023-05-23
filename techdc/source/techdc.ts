@@ -26,7 +26,6 @@ const regex = {
 		selectStyle.selectedIndex = 3;
 
 		document.getElementById("user_input")!.onkeydown = (e) => {
-			console.log(e);
 			if (e.key == "Enter") {
 				go();
 			} else if (e.key.match(regex.valid)) {
