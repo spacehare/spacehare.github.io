@@ -2,7 +2,8 @@
 {
 "classname" "func_door"
 "_dirt" "-1"
-"minlight" "200"
+"_minlight" "200"
+"_lightignore" "1"
 // brush 0
 {
 ( -512 -448 0 ) ( -512 -447 0 ) ( -512 -448 1 ) 128_blue_2 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1

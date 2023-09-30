@@ -2,3 +2,5 @@
 node_modules
 playing
 *js.map
+*.blend1
+.venv

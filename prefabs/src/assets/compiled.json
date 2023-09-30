@@ -1,0 +1,198 @@
+{
+	"45 bend": {
+		"objects": {
+			"4": {},
+			"8": {},
+			"16": {},
+			"32": {},
+			"64": {}
+		}
+	},
+	"90 bend": {
+		"objects": {
+			"4": {},
+			"8": {},
+			"16": {},
+			"32": {},
+			"64": {}
+		}
+	},
+	"czg 12": {
+		"circle": {
+			"objects": {
+				"64": {
+					"x scale": 0.995713,
+					"seamless": false
+				},
+				"128": {
+					"x scale": 0.809016,
+					"seamless": true,
+					"size": [128, 128, 64]
+				},
+				"256": {
+					"x scale": 0.809016,
+					"seamless": true
+				},
+				"320": {}
+			},
+			"grid": "8 mix",
+			"svg": "czg 12 circle"
+		},
+		"fill": {
+			"objects": {
+				"64": {},
+				"128": {},
+				"256": {
+					"name": "fill",
+					"size": [96, 96, 64]
+				}
+			},
+			"grid": "6 mix",
+			"svg": "czg 12 fill"
+		},
+		"half": {
+			"objects": {
+				"64": {},
+				"128": {},
+				"256": {}
+			},
+			"grid": "8 mix",
+			"svg": "czg 12 half"
+		},
+		"quarter": {
+			"objects": {
+				"64": {},
+				"128": {},
+				"256": {
+					"name": "quarter",
+					"size": [128, 128, 64]
+				}
+			},
+			"grid": "4 uniform",
+			"svg": "czg 12 quarter"
+		}
+	},
+	"czg 24": {
+		"circle": {
+			"objects": {
+				"256": {},
+				"512": {
+					"name": "CZG 24 sided pseudo-cylinder",
+					"size": [512, 512, 64]
+				}
+			},
+			"grid": "8 mix",
+			"svg": "czg 24 circle"
+		},
+		"fill": {
+			"objects": {
+				"256": {},
+				"512": {
+					"name": "fill",
+					"size": [224, 224, 64]
+				}
+			},
+			"grid": "7 uniform",
+			"svg": "czg 24 fill"
+		},
+		"half": {
+			"objects": {
+				"512": {}
+			},
+			"grid": "8 mix",
+			"svg": "czg 24 half"
+		},
+		"halo": {
+			"objects": {
+				"256, 128 (64)": {},
+				"384, 256 (64)": {},
+				"512, 384 (64)": {},
+				"512, 448 (32)": {},
+				"576, 512 (32)": {},
+				"640, 512 (64)": {}
+			},
+			"grid": "7 uniform"
+		},
+		"quarter": {
+			"objects": {
+				"256": {},
+				"512": {
+					"name": "quarter",
+					"size": [224, 224, 64]
+				}
+			},
+			"grid": "8 mix",
+			"svg": "czg 24 quarter"
+		}
+	},
+	"hexagon": {
+		"objects": {
+			"hexagon 3-7, 224x224": {},
+			"hexagon 3.5-7, 92x168": {},
+			"hexagon 3.5-7, 128x112": {},
+			"hexagon 3.5-7, 256x224": {},
+			"hexagon 3.5-7, 320x280": {},
+			"hexagon 3.5-7, 384x336": {},
+			"hexagon 3.5-7, 448x392": {},
+			"hexagon 3.5-7, 512x448": {},
+			"hexagon 4-7, 256x224": {},
+			"hexagon 4-8, 256x256": {}
+		}
+	},
+	"octagon": {
+		"octagon 1-3": {
+			"objects": {
+				"octagon 1-3, 128, circle": {
+					"name": "octagon, round",
+					"size": [128, 128, 64],
+					"x scale": 0.790558,
+					"seamless": true
+				},
+				"octagon 1-3, 128, fill": {},
+				"octagon 1-3, 128, quarter": {}
+			}
+		}
+	},
+	"other": {
+		"objects": {
+			"45-192": {
+				"name": "45\u00b0 graybox",
+				"size": [192, 192, 64]
+			},
+			"czg 24 to 12, 512": {
+				"name": "CZG 24 to 12",
+				"size": [512, 512, 64]
+			},
+			"door": {},
+			"light long, makkon": {},
+			"light round, makkon": {},
+			"light wide, makkon": {},
+			"rotate setup": {},
+			"stairs deep 45": {},
+			"stairs deep": {},
+			"stairs straight 45": {},
+			"stairs straight": {}
+		},
+		"reduction": {
+			"24 to 12": {
+				"objects": {
+					"512-256 quarter, 256": {},
+					"512-256": {
+						"name": "CZG 24 to 12, triangle edge loops",
+						"size": [512, 512, 64],
+						"size2": [256, 256, 64]
+					}
+				}
+			}
+		}
+	},
+	"radial": {
+		"objects": {
+			"6sided": {},
+			"8sided_clean": {},
+			"12sided_nomirror": {},
+			"24sided_nomirror": {}
+		},
+		"credit": "Markie, Bal, Makkon"
+	}
+}
