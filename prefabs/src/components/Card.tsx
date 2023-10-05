@@ -1,21 +1,22 @@
 import ButtonGrid from './ButtonGrid'
 import BrushPreview from './BrushPreview'
 import * as svgs from '../assets/svg/45 bend.svg'
-import { For } from 'solid-js'
-import styles from '../App.module.scss';
-
-// populate by saying "czg 12 circle"
-// get proper SVG, grid, and buttons
-// 64, 128, 256, etc
+import { For, JSXElement } from 'solid-js'
+import styles from '../App.module.sass';
+import ButtonCopy from './CopyButton';
 
 interface props {
-	obj: any
+	title: string,
+	element: JSXElement
+	img?: any
 }
 
 export default (props: props) => {
-	return <div class={styles.alt_display}>
-		<img src={`src/assets/svg/${props.obj.svg}.svg`} />
-		<img src={`src/assets/svg/grid ${props.obj.grid}.svg`} class={styles.gridlines} />
-		<ButtonGrid obj={props.obj} />
+	return <div class={styles.card}>
+		<img src={props.img} />
+		<div>{props.title}</div>
+		<div>{props.element}</div>
+		{/* <img src={`src/assets/svg/${props.fab.svg}.svg`} /> */}
+		{/* <img src={`src/assets/svg/grid ${props.fab.grid}.svg`} class={styles.gridlines} /> */}
 	</div>
 }

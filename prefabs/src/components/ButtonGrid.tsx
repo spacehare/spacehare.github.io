@@ -1,7 +1,7 @@
 import { For } from 'solid-js'
-import ButtonCopy from "./ButtonCopy"
+import ButtonCopy from "./CopyButton"
 import BrushPreview from "./BrushPreview"
-import styles from '../App.module.scss';
+import styles from '../App.module.sass';
 
 
 interface props {
@@ -10,8 +10,8 @@ interface props {
 
 export default (props: props) => {
 	return <div class={styles.button_grid}>
-		<For each={Object.entries(props.obj.objects)}>{(arg: any) =>
-			<ButtonCopy obj={arg}></ButtonCopy>
+		<For each={props.obj}>{(entry: any) =>
+			<ButtonCopy text={entry.dif} what={entry.brush} />
 		}</For>
 	</div >
 }
