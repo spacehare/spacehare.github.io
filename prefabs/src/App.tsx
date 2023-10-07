@@ -1,34 +1,32 @@
 import type { Component } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
+import { usePrefab } from './components/PrefabProvider';
 import wad from '../src/assets/wad.json'
 import styles from './App.module.sass';
 import DropDown from './components/Dropdown';
 import Prefabs from './components/Prefabs'
-import brushes from './assets/brushes.json'
-import { createSignal, createEffect } from 'solid-js';
 
-const [trimStyle, setTrimStyle] = createSignal<string>(wad.default.trim.style)
-const [trimColor, setTrimColor] = createSignal<string>(wad.default.trim.color)
-const [prototypeColor, setPrototypeColor] = createSignal<string>(wad.default.prototype)
-const [searchText, setSearchText] = createSignal<string>('')
-const [desiredBrush, setDesiredBrush] = createSignal<number>(-1)
+const App: Component = () => {
+    const [trimStyle, setTrimStyle] = createSignal<string>(wad.default.trim.style)
+    const [trimColor, setTrimColor] = createSignal<string>(wad.default.trim.color)
+    const [prototypeColor, setPrototypeColor] = createSignal<string>(wad.default.prototype)
+    const [searchText, setSearchText] = createSignal<string>('')
+    const [desiredPrefab, setDesiredPrefab] = usePrefab()
 
-const Copy = (what: any) => {
-    navigator.clipboard.writeText(what)
-}
-createEffect(() => {
-    if (desiredBrush() != -1) {
-        let output: string = brushes.prefabs[desiredBrush()].brush
-            .replaceAll(wad.default.trim.style, trimStyle())
-            .replaceAll(wad.default.trim.color, trimColor())
-            .replaceAll(wad.default.prototype, prototypeColor())
-            .replaceAll('@@@_REPLACE_ME_@@@', Date.now().toString())
+    createEffect(() => {
+        if (desiredPrefab()) {
+            let output: string = desiredPrefab()!
+                .replaceAll(wad.default.trim.style, trimStyle())
+                .replaceAll(wad.default.trim.color, trimColor())
+                .replaceAll(wad.default.prototype, prototypeColor())
+                .replaceAll('@@@_REPLACE_ME_@@@', Date.now().toString())
 
-        Copy(output)
-        setDesiredBrush(-1)
-    }
-})
+            navigator.clipboard.writeText(output)
+            setDesiredPrefab(null)
+        }
+    })
 
-const warning = `README
+    const warning = `README
 You should have both prototype_wad_1_3.wad and makkon_trim_guide.wad loaded to avoid UV corruption;
 OR
 ctrl+alt+v, apply a new texture, ctrl+x, ctrl+v
@@ -37,8 +35,6 @@ in trenchbroom, when you hit ctrl+z (undo) on a prefab you pasted in, it will no
 
 technical note:
 brushes that need to be unique (such as linked groups) will have their trenchbroom linked ID set to Date.now(); milliseconds since unix epoch.`
-
-const App: Component = () => {
     return (
         <div class={styles.App}>
             <div class={styles.sidebar}>
@@ -53,21 +49,22 @@ const App: Component = () => {
                 </div>
                 {/* onChange={e => setSearchText(e.currentTarget.value)} */}
                 <div class={styles.bottomLinks}>
+                    Resources:
                     <a href="https://web.archive.org/web/20230121043915/http://khreathor.xyz/site/prototype/">
                         Prototype textures by Khreathor
                     </a>
                     <a href="https://cdn.discordapp.com/attachments/1017318141480665088/1018287700962451476/makkon_trim_guide.wad">
                         Makkon trim textures by Kebby_
                     </a>
-                    <a href="https: //developer.valvesoftware.com/wiki/MAP_file_format">
+                    Technical:
+                    <a href="https://developer.valvesoftware.com/wiki/MAP_file_format">
                         Valve MAP file format
                     </a>
                 </div>
             </div>
-            <Prefabs buttonSignal={setDesiredBrush} searchSignal={searchText} />
+            <Prefabs searchSignal={searchText} />
         </div>
-
     );
 };
 
-export default App;
+export default App

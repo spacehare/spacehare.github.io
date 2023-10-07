@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="321.86865"
-   height="320.13995"
-   viewBox="0 0 321.86865 320.13995"
+   width="321.12143"
+   height="281.98862"
+   viewBox="0 0 321.12143 281.98862"
    version="1.1"
    id="svg5"
    xmlns="http://www.w3.org/2000/svg"
@@ -55,27 +55,27 @@
   </defs>
   <g
      id="layer1"
-     transform="translate(-6689.0656,-36079.927)">
+     transform="translate(-7319.2922,-35759.005)">
     <g
-       id="id_hexagon_4-8"
-       transform="matrix(1.9991842,0,0,2.2704962,-7144.2893,-44748.602)"
+       id="id_hexagon_3.5-7"
+       transform="matrix(1.9945431,0,0,1.9893518,-6481.9486,-35060.433)"
        style="stroke-linecap:round;stroke-linejoin:round">
       <path
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 6959.9999,35600 h 80 l 40,70 -40,70 h -80 l -40,-70 40,-70"
-         id="path11896-6" />
+         d="m 6954.9505,35599.753 h 90.2462 l 34.8032,70.247 -34.8032,70.502 h -90.2462 l -34.9506,-70.502 34.9506,-70.247"
+         id="path11896-31" />
       <path
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 6919.9999,35670 h 160"
-         id="path11898-8" />
+         id="path11898-6" />
       <path
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 7039.9999,35600 -80,140"
-         id="path11900-28" />
+         d="m 7045.1967,35599.753 -90.2462,140.749"
+         id="path11900-2" />
       <path
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 7039.9999,35740 -80,-140"
-         id="path11902-1" />
+         d="m 7045.1967,35740.502 -90.2462,-140.749"
+         id="path11902-3" />
     </g>
   </g>
 </svg>

@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="321.86865"
-   height="320.13995"
-   viewBox="0 0 321.86865 320.13995"
+   width="323.99725"
+   height="323.9061"
+   viewBox="0 0 323.99725 323.9061"
    version="1.1"
    id="svg5"
    xmlns="http://www.w3.org/2000/svg"
@@ -55,27 +55,31 @@
   </defs>
   <g
      id="layer1"
-     transform="translate(-6689.0656,-36079.927)">
+     transform="translate(-5757.9988,-36078.111)">
     <g
-       id="id_hexagon_4-8"
-       transform="matrix(1.9991842,0,0,2.2704962,-7144.2893,-44748.602)"
-       style="stroke-linecap:round;stroke-linejoin:round">
+       id="id_octagon_card_4-3"
+       style="stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       transform="matrix(12.799868,0,0,12.796266,-75103.167,-419978.81)">
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 6959.9999,35600 h 80 l 40,70 -40,70 h -80 l -40,-70 40,-70"
-         id="path11896-6" />
+         style="fill:none;stroke:#ffffff;stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 6325,35640 h 10 l 7.5,7.5 v 10 l -7.5,7.5 h -10 l -7.5,-7.5 v -10 l 7.5,-7.5"
+         id="path22394-7" />
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 6919.9999,35670 h 160"
-         id="path11898-8" />
+         style="fill:none;stroke:#ffffff;stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 6335,35665 -10,-25"
+         id="path22396-7" />
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 7039.9999,35600 -80,140"
-         id="path11900-28" />
+         style="fill:none;stroke:#ffffff;stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 6325,35665 10,-25"
+         id="path22398-8" />
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 7039.9999,35740 -80,-140"
-         id="path11902-1" />
+         style="fill:none;stroke:#ffffff;stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 6317.5,35657.5 25,-10"
+         id="path22400-8" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.312547;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 6317.5,35647.5 25,10"
+         id="path22402-7" />
     </g>
   </g>
 </svg>

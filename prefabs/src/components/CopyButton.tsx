@@ -1,15 +1,16 @@
-import { For, Index, Show, Setter, createEffect } from 'solid-js'
 import styles from '../App.module.sass';
+import { usePrefab } from './PrefabProvider';
 
 
 interface props {
 	text: string,
-	idx: number,
-	buttonSignal: Setter<number>
+	data: any,
 }
 
 
-
 export default (props: props) => {
-	return <button class={styles.CopyButton} onclick={() => props.buttonSignal(props.idx)}>{props.text}</button>
+	const [desiredPrefab, setDesiredPrefab] = usePrefab()
+	return <button class={styles.CopyButton} onclick={() => setDesiredPrefab(props.data)}>
+		<span>{props.text}</span>
+	</button>
 }

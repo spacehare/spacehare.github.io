@@ -24,9 +24,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      showgrid="true"
-     inkscape:zoom="0.45254834"
-     inkscape:cx="6166.1921"
-     inkscape:cy="35649.23"
+     inkscape:zoom="0.64"
+     inkscape:cx="5232.0313"
+     inkscape:cy="35775"
      inkscape:window-width="1920"
      inkscape:window-height="1027"
      inkscape:window-x="1912"
@@ -874,15 +874,15 @@
     <g
        id="id_45_bend"
        inkscape:label="45 bend"
-       transform="matrix(4,0,0,4,-14690,-106720)"
-       style="stroke-linecap:round;stroke-linejoin:round">
+       transform="matrix(6.7368421,0,0,6.7368421,-28105.263,-204071.58)"
+       style="stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none">
       <path
-         style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         style="fill:none;stroke:#ffffff;stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
          d="m 4920,35600 h -30 l -17.5,17.5 15,15 12.5,-12.5 h 20 v -20"
          id="path13495"
          sodipodi:nodetypes="ccccccc" />
       <path
-         style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         style="fill:none;stroke:#ffffff;stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
          d="m 4900,35620 -10,-20"
          id="path13497"
          sodipodi:nodetypes="cc" />
@@ -977,6 +977,20 @@
          style="fill:none;stroke:#ffffff;stroke-width:0.3125472;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
          d="m 6317.5,35647.5 25,10"
          id="path22402-7" />
+    </g>
+    <g
+       id="id_90_bend"
+       inkscape:label="90 bend">
+      <path
+         style="opacity:1;fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 5200,36160 v -320 l 80,80 v 160 z"
+         id="path483"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         style="opacity:1;fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 5200,35840 h 320 l -80,80 h -160 z"
+         id="path1192"
+         sodipodi:nodetypes="ccccc" />
     </g>
   </g>
 </svg>

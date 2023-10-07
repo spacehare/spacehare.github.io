@@ -2,7 +2,8 @@ $svgbutton_size: 64px
 $c_green0: #0a2c19
 $c_green1: #154128
 $c_green2: #04180c
-$c_green3: #3ad468
+$c_green3: #aed1b9
+$c_green4: #0b1f12
 $s2: 960px
 $s4: $s2 / 2
 $s8: $s2 / 4
@@ -41,23 +42,41 @@ body, .App
     row-gap: 10px
     border-radius: 6px
 
-.CopyButton
+.CopyButton, .CopyButton *
     font-size: 18px
     border: none
-    background-color: $c_green1
     border-radius: 6px
-    margin: 2px 2px
-    padding: 6px
-    margin: 0
-    min-width: 32px
+    background-color: $c_green1
+    margin: 3px
+    min-width: 60px
+    height: 30px
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: clip
+    text-shadow: 1px 1px $c_green2
+    text-align: center
+    transition: all 2s
 
     &:hover
         filter: brightness(133%)
-        transform: scale(110%)
+        transform: scale(106%)
+        transition-duration: .25s
+
+        span
+            transition-duration: 0s
+            visibility: hidden
+
+        &::before
+            position: absolute
+            left: 0
+            right: 0
+            font-size: 15px
+            content: '📋'
 
     &:active
-        filter: brightness(166%)
+        filter: brightness(200%)
         transform: scale(90%)
+        transition-duration: 0s
 
 img
     display: block //images are default inline, creating a gap underneath
@@ -75,27 +94,27 @@ img
 select, input
     background-color: $c_green2
 
-.gridlines
-    // width: $svg_size;
-    // height: $svg_size;
-    position: absolute
-    z-index: -1
-    opacity: 10%
-    // visibility: hidden;
+// .gridlines
+//     // width: $svg_size;
+//     // height: $svg_size;
+//     position: absolute
+//     z-index: -1
+//     opacity: 10%
+//     // visibility: hidden;
 
-.button_grid
-    // background-color: red;
-    display: grid
-    grid-template-columns: 1fr 1fr 1fr
-    grid-auto-rows: 32px
-    grid-column-gap: 0px
-    grid-row-gap: 0px
-    padding-left: 2px
+// .button_grid
+//     // background-color: red;
+//     display: grid
+//     grid-template-columns: 1fr 1fr 1fr
+//     grid-auto-rows: 32px
+//     grid-column-gap: 0px
+//     grid-row-gap: 0px
+//     padding-left: 2px
 
 .generalInfo
     padding: 14px
-    color: $c_green3
-    background-color: $c_green2
+    color: #ccc
+    background-color: $c_green4
     white-space: pre-wrap
     border-radius: 6px
 
@@ -109,22 +128,35 @@ select, input
 
 .prefabs
     padding: 12px
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+    display: flex
+    flex-wrap: wrap
     gap: 8px
     width: 100%
-    // height: fit-content
-    align-content: flex-start
+    align-content: flex-start // or height: fit-content
 
 .card
     display: flex
-    flex-direction: row
+    flex-direction: column
     flex-wrap: nowrap
-    justify-content: center
-    align-items: center
     align-content: stretch
-    padding: 8px
-    background-color: $c_green2
+    padding: 12px 8px 8px 8px
+    background-color: $c_green4
+    border-radius: 8px
+    gap: 6px
+    width: 160px
+    min-height: 250px
+
+    .Buttons
+        margin-top: auto // snap to bottom
+        text-align: center // center button array
+
+    .cardTitle
+        font-size: 18px
+        text-align: center
+
+    img
+        margin-left: auto
+        margin-right: auto
 
 .dropdowns
     // padding: 6px 0

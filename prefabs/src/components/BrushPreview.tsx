@@ -2,15 +2,16 @@ import "../assets/svg"
 import { Show } from "solid-js"
 
 interface props {
-	brushSVG: string
+	img: string
+	grid: string
 }
 
 export default (props: props) => {
 	return (
 		<>
-			<img src={props.brushSVG}></img>
+			<img src={props.img}></img>
 			<Show when={true}>
-				<img src={props.svgGrid} class="gridlines"></img>
+				<img src={props.grid} class="gridlines"></img>
 			</Show>
 		</>
 	)

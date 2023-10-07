@@ -5,8 +5,9 @@ import re
 import argparse
 
 INKSCAPE = r"C:\Program Files\Inkscape\bin\inkscape.exe"
-FILE = 'prefabs/dev/main.svg'  # os.path.split(__file__)[0] + r"\main.svg"
-DEST = r"prefabs\src\assets\svg/"
+HERE = __file__
+FILE = '../../main.svg'  # os.path.split(__file__)[0] + r"\main.svg"
+DEST = r"../../..\src\assets\svg/"
 
 ap = argparse.ArgumentParser(description="export assistant")
 

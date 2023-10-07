@@ -1,22 +1,23 @@
 import ButtonGrid from './ButtonGrid'
 import BrushPreview from './BrushPreview'
 import * as svgs from '../assets/svg/45 bend.svg'
-import { For, JSXElement } from 'solid-js'
+import { For, JSXElement, children, Show } from 'solid-js'
 import styles from '../App.module.sass';
 import ButtonCopy from './CopyButton';
 
 interface props {
 	title: string,
-	element: JSXElement
-	img?: any
+	children?: any,
+	image?: string,
 }
 
 export default (props: props) => {
+	const c = children(() => props.children)
 	return <div class={styles.card}>
-		<img src={props.img} />
-		<div>{props.title}</div>
-		<div>{props.element}</div>
-		{/* <img src={`src/assets/svg/${props.fab.svg}.svg`} /> */}
-		{/* <img src={`src/assets/svg/grid ${props.fab.grid}.svg`} class={styles.gridlines} /> */}
+		<div class={styles.cardTitle}>{props.title}</div>
+		<Show when={props.image}>
+			<img src={props.image} />
+		</Show>
+		<div class={styles.Buttons}>{c()}</div>
 	</div>
 }
