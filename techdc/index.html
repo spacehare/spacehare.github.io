@@ -6,12 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>techdc</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="screen" href="build/techdc.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="source/techdc.scss" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu" />
 </head>
 
 <body>
-	<script src="build/techdc.js"></script>
+	<script type="module">
+		import './source/techdc.scss'
+		import './source/techdc.ts'
+	</script>
 	<div id="snackbar">Copied to clipboard 📝🐇</div>
 	<div class="top">
 		<div>
@@ -25,7 +28,7 @@
 			<div>TEXT INPUT</div>
 		</div>
 		<div>
-			<button onclick="go()" id="gen_decal">Generate<br><span class="hint">(ENTER)</span></button>
+			<button id="gen_decal">Generate<br><span class="hint">(ENTER)</span></button>
 			<div>COPY</div>
 		</div>
 	</div>
