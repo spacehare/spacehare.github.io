@@ -29,7 +29,7 @@ const App: Component = () => {
     const warning = `README
 clicking a button will copy that brush or entity to your clipboard
 
-You should have both prototype_wad_1_3.wad and makkon_trim_guide.wad loaded to avoid UV corruption;
+You should have both prototype_1_3.wad and makkon_trim_guide.wad loaded to avoid UV corruption;
 OR
 ctrl+alt+v, apply a new texture, ctrl+x, ctrl+v
 
