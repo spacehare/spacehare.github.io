@@ -1,14 +1,15 @@
 $svgbutton_size: 64px
 $c_green0: #0a2c19
 $c_green1: #154128
+$c_green1b: #1c6d3e
 $c_green2: #04180c
-$c_green3: #aed1b9
+$c_green3: #20b451
 $c_green4: #0b1f12
 $s2: 960px
-$s4: $s2 / 2
-$s8: $s2 / 4
-$s16: $s2 / 8
-$svg_size: $s16 * 0.75
+$s4: calc($s2 / 2)
+$s8: calc($s2 / 4)
+$s16: calc($s2 / 8)
+$svg_size: calc($s16 * 0.75)
 
 *
     font-family: consolas, monospace
@@ -42,8 +43,8 @@ body, .App
     row-gap: 10px
     border-radius: 6px
 
-.CopyButton, .CopyButton *
-    font-size: 18px
+.CopyButton
+    color: white
     border: none
     border-radius: 6px
     background-color: $c_green1
@@ -57,32 +58,40 @@ body, .App
     text-align: center
     transition: all 2s
 
-    &:hover
-        filter: brightness(133%)
-        transform: scale(106%)
+    span
+        font-size: 18px
+
+    &:hover:not(:active)
+        background-color: $c_green1b
+        transform: scale(110%)
         transition-duration: .25s
 
+    &:hover, &:active
         span
             transition-duration: 0s
             visibility: hidden
+            // filter: blur(1px)
+            // opacity: .5
 
-        &::before
+        &::after
             position: absolute
             left: 0
             right: 0
-            font-size: 15px
+            top: 0
+            bottom: 0
+            font-size: 20px
             content: '📋'
 
     &:active
-        filter: brightness(200%)
+        background-color: $c_green3
         transform: scale(90%)
         transition-duration: 0s
 
 img
     display: block //images are default inline, creating a gap underneath
-    min-width: $svg_size
-    width: $svg_size
-    height: $svg_size
+    // min-width: $svg_size
+    // width: $svg_size
+    // height: $svg_size
 
 .Search
     outline: none
@@ -112,6 +121,7 @@ select, input
 //     padding-left: 2px
 
 .generalInfo
+    font-size: 14px
     padding: 14px
     color: #ccc
     background-color: $c_green4
@@ -151,12 +161,17 @@ select, input
         text-align: center // center button array
 
     .cardTitle
+        color: #ddd
         font-size: 18px
         text-align: center
 
     img
-        margin-left: auto
-        margin-right: auto
+        padding: 2px
+    //     margin-left: auto
+    //     margin-right: auto
+
+.brushSvg
+    filter: brightness(90%)
 
 .dropdowns
     // padding: 6px 0
@@ -179,9 +194,3 @@ select, input
     gap: 12px
     a
         font-size: 14px
-
-//   img {
-//     height: $svg_size;
-//     width: $svg_size;
-//   }
-// }

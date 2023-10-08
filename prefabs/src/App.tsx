@@ -27,6 +27,8 @@ const App: Component = () => {
     })
 
     const warning = `README
+clicking a button will copy that brush or entity to your clipboard
+
 You should have both prototype_wad_1_3.wad and makkon_trim_guide.wad loaded to avoid UV corruption;
 OR
 ctrl+alt+v, apply a new texture, ctrl+x, ctrl+v
@@ -34,7 +36,7 @@ ctrl+alt+v, apply a new texture, ctrl+x, ctrl+v
 in trenchbroom, when you hit ctrl+z (undo) on a prefab you pasted in, it will not undo the paste — instead it reverts the translation from its original position to its new position. so you should delete brushes you pasted in instead of hitting undo
 
 technical note:
-brushes that need to be unique (such as linked groups) will have their trenchbroom linked ID set to Date.now(); milliseconds since unix epoch.`
+brushes that need to be unique (such as linked groups; ex: "radial") will have their trenchbroom linked ID set to Date.now() (milliseconds since unix epoch)`
     return (
         <div class={styles.App}>
             <div class={styles.sidebar}>

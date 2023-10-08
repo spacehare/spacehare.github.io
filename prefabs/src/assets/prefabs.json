@@ -227,7 +227,7 @@
 		]
 	},
 	"45 brush": {
-		"image": "images/45 brush.png",
+		"image": "png/45 brush.png",
 		"prefabs": [
 			{
 				"uploader": "rabbit",
