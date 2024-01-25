@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="323.99991"
+   height="222.94728"
+   viewBox="0 0 323.99991 222.94728"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient14121">
+      <stop
+         style="stop-color:#efefef;stop-opacity:1;"
+         offset="0"
+         id="stop14119" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient14073">
+      <stop
+         style="stop-color:#efefef;stop-opacity:1;"
+         offset="0"
+         id="stop14071" />
+    </linearGradient>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="82"
+       height="82"
+       patternTransform="translate(6639,36399)"
+       id="pattern3654">
+      <g
+         id="g3652"
+         transform="translate(-6639,-36399)">
+        <path
+           style="opacity:1;fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+           d="m 6640,36400 v 80"
+           id="path17310" />
+        <path
+           style="opacity:1;fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+           d="m 6720,36400 v 80"
+           id="path17312" />
+        <path
+           style="opacity:1;fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+           d="m 6640,36480 h 80"
+           id="path17314" />
+        <path
+           style="opacity:1;fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+           d="m 6720,36400 h -80 80"
+           id="path17316" />
+      </g>
+    </pattern>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-4718.0002,-35757.999)">
+    <g
+       id="id_45_bend"
+       transform="matrix(6.7368421,0,0,6.7368421,-28105.263,-204071.58)"
+       style="stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none">
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 4920,35600 h -30 l -17.5,17.5 15,15 12.5,-12.5 h 20 v -20"
+         id="path13495" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.59375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         d="m 4900,35620 -10,-20"
+         id="path13497" />
+    </g>
+  </g>
+</svg>

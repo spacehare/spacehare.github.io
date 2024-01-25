@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="161.99951"
+   height="162"
+   viewBox="0 0 161.99951 162"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient14121">
+      <stop
+         style="stop-color:#efefef;stop-opacity:1;"
+         offset="0"
+         id="stop14119" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient14073">
+      <stop
+         style="stop-color:#efefef;stop-opacity:1;"
+         offset="0"
+         id="stop14071" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-6479,-34479)">
+    <g
+       id="id_czg_12_cylinder_b">
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6640,34800 20,80 60,60 80,20 80,-20 60,-60 20,-80 -20,-80 -60,-60 -80,-20 -80,20 -60,60 z"
+         id="path373" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6640,34800 h 320"
+         id="path375" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6800,34960 v -320"
+         id="path377" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6720,34660 160,280"
+         id="path379" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6660,34720 280,160"
+         id="path381" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6720,34940 160,-280"
+         id="path383" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6940,34720 -280,160"
+         id="path385" />
+    </g>
+    <g
+       id="id_czg_12_fill_b"
+       transform="translate(-80,-80)"
+       style="stroke-width:2;stroke-dasharray:none">
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6560,34720 20,-80 60,-60 80,-20 h -160 z"
+         id="path1578" />
+      <path
+         style="fill:none;fill-opacity:0.0018149;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m 6580,34640 -20,-80 80,20"
+         id="path1580" />
+    </g>
+  </g>
+</svg>

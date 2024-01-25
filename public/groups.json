@@ -1,0 +1,92 @@
+[
+	{
+		"id": 14,
+		"name": "trim",
+		"image": "",
+		"children": [45, 46, 47, 48, 49]
+	},
+	{
+		"id": 13,
+		"name": "45° bend",
+		"image": "svg/45 bend.svg",
+		"children": [39, 40, 41, 42, 43]
+	},
+	{
+		"id": 0,
+		"name": "45-90° bend",
+		"image": "svg/45-90 bend.svg",
+		"children": [0, 1, 2, 3, 4]
+	},
+	{
+		"id": 1,
+		"name": "90° bend",
+		"image": "svg/90 bend.svg",
+		"children": [5, 6, 7, 8, 9]
+	},
+	{
+		"id": 2,
+		"name": "czg 12 cylinder",
+		"image": "svg/czg 12 circle.svg",
+		"children": [10, 11, 12]
+	},
+	{
+		"id": 10,
+		"name": "czg 12 half",
+		"image": "svg/czg 12 half.svg",
+		"children": [32, 33, 34]
+	},
+	{
+		"id": 9,
+		"name": "czg 12 quarter",
+		"image": "svg/czg 12 quarter.svg",
+		"children": [31, 35, 36]
+	},
+	{
+		"id": 3,
+		"name": "czg 12 fill",
+		"image": "svg/czg 12 fill.svg",
+		"children": [13, 14, 15]
+	},
+	{
+		"id": 4,
+		"name": "czg 24 cylinder",
+		"image": "svg/czg 24 circle.svg",
+		"children": [16]
+	},
+	{
+		"id": 11,
+		"name": "czg 24 quarter",
+		"image": "svg/czg 24 quarter.svg",
+		"children": [37]
+	},
+	{
+		"id": 12,
+		"name": "czg 24 half",
+		"image": "svg/czg 24 half.svg",
+		"children": [38]
+	},
+	{
+		"id": 5,
+		"name": "czg 24 fill",
+		"image": "svg/czg 24 fill.svg",
+		"children": [17]
+	},
+	{
+		"id": 6,
+		"name": "radial",
+		"image": null,
+		"children": [18, 19, 20, 21]
+	},
+	{
+		"id": 7,
+		"name": "stairs",
+		"image": null,
+		"children": [22, 23, 24, 25]
+	},
+	{
+		"id": 8,
+		"name": "45° brush",
+		"image": "png/45 brush.png",
+		"children": [27, 28]
+	}
+]
