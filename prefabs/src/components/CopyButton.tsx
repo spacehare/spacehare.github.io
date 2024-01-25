@@ -1,16 +1,19 @@
-import styles from '../App.module.sass';
-import { usePrefab } from './PrefabProvider';
-
+import styles from '../App.module.sass'
+import { usePrefab } from './PrefabProvider'
 
 interface props {
-	text: string,
-	data: any,
+	text: string
+	fileName: any
 }
 
-
 export default (props: props) => {
-	const [desiredPrefab, setDesiredPrefab] = usePrefab()
-	return <button class={styles.CopyButton} onclick={() => setDesiredPrefab(props.data)}>
-		<span>{props.text}</span>
-	</button>
+	const [prefabToBeCopied, setprefabToBeCopied] = usePrefab()
+	return (
+		<button
+			class={styles.CopyButton}
+			onclick={() => setprefabToBeCopied(props.fileName)}
+		>
+			<span>{props.text}</span>
+		</button>
+	)
 }

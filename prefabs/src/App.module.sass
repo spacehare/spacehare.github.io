@@ -5,11 +5,6 @@ $c_green1b: #1c6d3e
 $c_green2: #04180c
 $c_green3: #20b451
 $c_green4: #0b1f12
-$s2: 960px
-$s4: calc($s2 / 2)
-$s8: calc($s2 / 4)
-$s16: calc($s2 / 8)
-$svg_size: calc($s16 * 0.75)
 
 *
     font-family: consolas, monospace
@@ -26,12 +21,13 @@ body, .App
     justify-content: flex-start
     align-items: stretch
     align-content: stretch
-    min-height: 100vh
 
 .sidebar
+    position: sticky
     background-color: $c_green1
-    max-width: 250px
-    min-width: 250px
+    max-width: 240px
+    min-width: 240px
+    top: 6px
     margin: 6px
     padding: 6px
     display: flex
@@ -42,13 +38,14 @@ body, .App
     align-content: stretch
     row-gap: 10px
     border-radius: 6px
+    height: calc(100vh - 24px) // account for padding and margin
+    // overflow-y: auto
 
 .CopyButton
     color: white
     border: none
     border-radius: 6px
     background-color: $c_green1
-    margin: 3px
     min-width: 60px
     height: 30px
     overflow: hidden
@@ -56,22 +53,21 @@ body, .App
     text-overflow: clip
     text-shadow: 1px 1px $c_green2
     text-align: center
-    transition: all 2s
+    transition: all .5s
+    user-select: none
 
     span
         font-size: 18px
 
     &:hover:not(:active)
         background-color: $c_green1b
-        transform: scale(110%)
+        transform: scale(102%)
         transition-duration: .25s
 
     &:hover, &:active
         span
             transition-duration: 0s
-            visibility: hidden
-            // filter: blur(1px)
-            // opacity: .5
+            opacity: 50%
 
         &::after
             position: absolute
@@ -89,9 +85,6 @@ body, .App
 
 img
     display: block //images are default inline, creating a gap underneath
-    // min-width: $svg_size
-    // width: $svg_size
-    // height: $svg_size
 
 .Search
     outline: none
@@ -111,15 +104,6 @@ select, input
 //     opacity: 10%
 //     // visibility: hidden;
 
-// .button_grid
-//     // background-color: red;
-//     display: grid
-//     grid-template-columns: 1fr 1fr 1fr
-//     grid-auto-rows: 32px
-//     grid-column-gap: 0px
-//     grid-row-gap: 0px
-//     padding-left: 2px
-
 .generalInfo
     font-size: 14px
     padding: 14px
@@ -129,15 +113,12 @@ select, input
     border-radius: 6px
 
 .gridlines
-    width: $svg_size
-    height: $svg_size
     position: absolute
     z-index: -1
     opacity: 10%
-    // visibility: hidden;
 
 .prefabs
-    padding: 12px
+    padding: 6px 6px 6px 0
     display: flex
     flex-wrap: wrap
     gap: 8px
@@ -149,16 +130,12 @@ select, input
     flex-direction: column
     flex-wrap: nowrap
     align-content: stretch
-    padding: 12px 8px 8px 8px
+    padding: 8px
     background-color: $c_green4
     border-radius: 8px
     gap: 6px
-    width: 160px
+    width: 158px
     min-height: 250px
-
-    .Buttons
-        margin-top: auto // snap to bottom
-        text-align: center // center button array
 
     .cardTitle
         color: #ddd
@@ -166,27 +143,23 @@ select, input
         text-align: center
 
     img
-        padding: 2px
-    //     margin-left: auto
-    //     margin-right: auto
+        padding: 8px
+
+.Buttons
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    gap: 6px
+
+    button
+        flex: fit-content
+
+    div // put credit on its own line
+        width: 100%
+        text-align: center
 
 .brushSvg
     filter: brightness(90%)
-
-.dropdowns
-    // padding: 6px 0
-    display: grid
-    grid-template-columns: repeat(2, 1fr)
-    grid-template-rows: repeat(3, 1fr)
-    column-gap: 10px
-    row-gap: 6px
-    align-items: center // vertically align labels
-    text-align: right
-
-    select
-        border: none
-        border-radius: 4px
-        padding: 2px
 
 .bottomLinks
     display: flex
@@ -194,3 +167,41 @@ select, input
     gap: 12px
     a
         font-size: 14px
+
+select
+    border: none
+    border-radius: 4px
+    padding: 2px
+
+.dropdowns
+    display: flex
+    flex-direction: column
+    gap: 6px
+
+.dropdown
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 8px
+
+    *
+        flex: 1
+
+    &:not(select)
+        text-align: right
+
+.individual
+    display: flex
+
+    align-items: center
+    background-color: $c_green4
+    padding: 6px
+    border-radius: 12px
+    width: 250px
+    gap: 6px
+
+    img
+        padding-left: 6px
+
+    button
+        flex: 1

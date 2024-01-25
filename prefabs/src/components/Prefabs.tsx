@@ -1,26 +1,46 @@
-import { For, Index, Show, Setter, createEffect, children, Accessor, JSXElement } from 'solid-js'
-import Card from './Card'
+import {
+	For,
+	Show,
+	createResource,
+	Switch,
+	Match,
+	useContext,
+	Suspense,
+} from 'solid-js'
 import styles from '../App.module.sass'
-import prefabs from '../assets/prefabs.json'
-import CopyButton from './CopyButton'
-import ButtonGrid from './ButtonGrid'
+import { searchMatch } from './Search'
+import { fetchJson, sorted } from './Common'
+import Groups from './Groups'
+import { ViewContext, viewModes } from './ViewContext'
+import IndividualPrefab from './IndividualPrefab'
+import { readMeText } from './ReadMe'
 
-interface props {
-	searchSignal: Accessor<string>
+export default () => {
+	const [prefabsJson] = createResource(() => fetchJson('prefabs'))
+	const { viewValue, sortValue } = useContext(ViewContext)
+	const [view, setView] = viewValue
+	const [sort, setSort] = sortValue
+
+	return (
+		<div class={styles.prefabs}>
+			<Suspense>
+				{/* <Show when={!prefabsJson.loading}> */}
+				<Switch>
+					<Match when={view() === viewModes.Group}>
+						<Groups source={prefabsJson()} />
+					</Match>
+					<Match when={view() === viewModes.Individual}>
+						<For each={sorted(prefabsJson(), sort())}>
+							{(prefab) => (
+								<Show when={searchMatch(prefab.name[0])}>
+									<IndividualPrefab prefab={prefab} />
+								</Show>
+							)}
+						</For>
+					</Match>
+				</Switch>
+				{/* </Show> */}
+			</Suspense>
+		</div>
+	)
 }
-
-export default (props: props) => {
-
-	return <div class={styles.prefabs}>
-		<For each={Object.entries(prefabs)}>{(group: any) =>
-			<Show when={group[0].toLowerCase().includes(props.searchSignal())}>
-				<Card image={group[1].image ? `/${group[1].image}` : ''} title={group[0]}>
-					<span>{group[1].note}</span>
-					<For each={Object.values(group[1].prefabs ?? '')}>{(brush: any) =>
-						<CopyButton text={brush.dif} data={brush.brush}></CopyButton>
-					}</For>
-				</Card>
-			</Show>
-		}</For>
-	</div>
-};
