@@ -13,7 +13,6 @@ import { fetchJson, sorted } from './Common'
 import Groups from './Groups'
 import { ViewContext, viewModes } from './ViewContext'
 import IndividualPrefab from './IndividualPrefab'
-import { readMeText } from './ReadMe'
 
 export default () => {
 	const [prefabsJson] = createResource(() => fetchJson('prefabs'))
@@ -24,22 +23,22 @@ export default () => {
 	return (
 		<div class={styles.prefabs}>
 			<Suspense>
-				{/* <Show when={!prefabsJson.loading}> */}
-				<Switch>
-					<Match when={view() === viewModes.Group}>
-						<Groups source={prefabsJson()} />
-					</Match>
-					<Match when={view() === viewModes.Individual}>
-						<For each={sorted(prefabsJson(), sort())}>
-							{(prefab) => (
-								<Show when={searchMatch(prefab.name[0])}>
-									<IndividualPrefab prefab={prefab} />
-								</Show>
-							)}
-						</For>
-					</Match>
-				</Switch>
-				{/* </Show> */}
+				<Show when={!prefabsJson.loading} fallback={<div>LOADING...</div>}>
+					<Switch>
+						<Match when={view() === viewModes.Group}>
+							<Groups source={prefabsJson()} />
+						</Match>
+						<Match when={view() === viewModes.Individual}>
+							<For each={sorted(prefabsJson(), sort())}>
+								{(prefab) => (
+									<Show when={searchMatch(prefab.name[0])}>
+										<IndividualPrefab prefab={prefab} />
+									</Show>
+								)}
+							</For>
+						</Match>
+					</Switch>
+				</Show>
 			</Suspense>
 		</div>
 	)
