@@ -15,7 +15,7 @@ const atkinson = Atkinson_Hyperlegible({
 })
 
 const roboto = Roboto_Flex({
-	weight: '100',
+	// weight: ['100', '1000'],
 	subsets: ['latin'],
 	variable: '--font-roboto',
 })
@@ -39,7 +39,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={`${roboto.variable} ${roboto_mono.variable} ${atkinson.variable} font-sans text-slate-50 antialiased`}
+				className={`${roboto.variable} ${roboto_mono.variable} ${atkinson.variable} font-sans text-lime-100 antialiased font-normal`}
 			>
 				{children}
 			</body>

@@ -7,7 +7,7 @@ export default function Home() {
 				return (
 					<a
 						href={`./${v}`}
-						className='text-8xl p-8 bg-green-900 rounded-md hover:bg-emerald-600 min-w-96 w-1/2 transition-all duration-[334ms]'
+						className='text-8xl p-8 bg-green-900 rounded-md hover:bg-emerald-600 min-w-96 w-1/2 transition-all duration-[334ms] font-thin'
 						key={v}
 					>
 						{v}
@@ -16,7 +16,7 @@ export default function Home() {
 			})}
 			<a
 				href='https://github.com/spacehare/spacehare.github.io'
-				className='hover:text-lime-50 text-lime-200 transition-all duration-200 hover:scale-105 text-lg'
+				className='hover:text-lime-50 text-lime-200 transition-all duration-200 hover:scale-105 text-lg font-thin'
 			>
 				https://github.com/spacehare/spacehare.github.io
 			</a>

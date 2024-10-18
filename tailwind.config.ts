@@ -15,6 +15,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        solid: {
+          dark: "#0B1F12",
+          med: "#0A2C19",
+          light: "#154128"
+        }
       },
       fontFamily: {
         atkinson: ['var(--font-atkinson)'],

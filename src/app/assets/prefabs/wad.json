@@ -1,0 +1,40 @@
+{
+	"default": {
+		"trim": {
+			"style": "band",
+			"color": "teal"
+		},
+		"prototype": {
+			"color": "cyan"
+		}
+	},
+	"trim": {
+		"style": [
+			"band",
+			"flat",
+			"soft"
+		],
+		"color": [
+			"blk",
+			"blue",
+			"brwn",
+			"grey",
+			"red",
+			"teal",
+			"wht",
+			"ylw"
+		]
+	},
+	"prototype": {
+		"color": [
+			"blood",
+			"blue",
+			"brown",
+			"cyan",
+			"gold",
+			"green",
+			"grey",
+			"honey"
+		]
+	}
+}

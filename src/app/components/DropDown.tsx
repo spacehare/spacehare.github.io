@@ -5,17 +5,27 @@ type Props = {
 	setter: any
 	getter: any
 	className?: string
+	storageKey?: string
 }
 
-export default ({ label, items, setter, getter, className }: Props) => {
+export default ({
+	label,
+	items,
+	setter,
+	getter,
+	className,
+	storageKey,
+}: Props) => {
 	return (
 		<div className={className}>
-			<div className='w-full text-right'>{label}</div>
+			<div className='w-full text-right m-auto'>{label}</div>
 			<select
-				className='w-full bg-emerald-900/50 rounded-sm'
+				className='w-full bg-solid-dark rounded-md p-1 h-fit'
 				value={getter}
 				onChange={(e) => {
 					setter(e.currentTarget.value)
+					if (storageKey)
+						localStorage.setItem(storageKey, e.currentTarget.value)
 				}}
 			>
 				{items.map((item) => (

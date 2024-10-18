@@ -2,15 +2,25 @@
 
 import prefabsData from '@/app/assets/prefabs/prefabs.json'
 import CopyButton from '../components/CopyButton'
-import Sidebar from './sidebar.mdx'
+import SidebarMdx from './sidebar.mdx'
 import { useState } from 'react'
 import DropDown from '../components/DropDown'
+import Wad from '@/app/assets/prefabs/wad.json'
 
 export default function Page() {
+	const [search, setSearch] = useState('')
+	const [searchRegex, setSearchRegex] = useState(false)
 	const [viewMode, setViewMode] = useState(true)
-	const [trimColor, setTrimColor] = useState('DEF 1')
-	const [trimStyle, setTrimStyle] = useState('DEF 2')
-	const [prototypeColor, setPrototypeColor] = useState('DEF 3')
+	const [viewSidebar, setViewSidebar] = useState(true)
+	const [trimColor, setTrimColor] = useState(
+		localStorage.getItem('trim_color') || Wad.default.trim.color
+	)
+	const [trimStyle, setTrimStyle] = useState(
+		localStorage.getItem('trim_style') || Wad.default.trim.style
+	)
+	const [prototypeColor, setPrototypeColor] = useState(
+		localStorage.getItem('prototype_color') || Wad.default.prototype.color
+	)
 
 	const uniqueGroups = Array.from(
 		new Map(
@@ -18,117 +28,193 @@ export default function Page() {
 		).values()
 	)
 
+	const searchMatch = (val: string) => {
+		if (searchRegex) {
+			return val.match(search)
+		} else {
+			const a = val.toLowerCase()
+			const b = search.toLowerCase()
+			return a.includes(b)
+		}
+	}
+
+	const sendPrefab = (data: string) => {
+		const output: string = JSON.parse(data)
+			.replaceAll(Wad.default.trim.color, trimColor)
+			.replaceAll(Wad.default.trim.style, trimStyle)
+			.replaceAll(Wad.default.prototype.color, prototypeColor)
+			.replaceAll('@@@_REPLACE_ME_@@@', Date.now().toString())
+			.replaceAll('__TB_empty', `128_${prototypeColor}_3`)
+
+		navigator.clipboard.writeText(output)
+	}
+
 	return (
-		<div className='flex gap-2 p-2 justify-between items-start bg-green-900 bg-gradient-to-t from-blue-900 to-cyan-600 min-h-screen'>
-			{/* SIDEBAR */}
-			<div className='min-w-64 max-w-64 bg-emerald-950/30 sticky h-fit top-2 p-4 flex flex-col gap-4 rounded-lg font-roboto text-lime-100'>
-				{/* SEARCH */}
-				<div>SEARCH</div>
-				{/* VIEW MODE */}
+		// PAGE
+		<div className='flex gap-2 p-2 justify-between items-start bg-solid-med min-h-screen font-normal'>
+			{/* FULL SIDEBAR */}
+			<div className='flex flex-col gap-3 sticky top-2'>
+				{/* SIDEBAR TOGGLE BUTTON*/}
 				<button
-					className='bg-sky-500 p-1 w-full text-left'
+					className='bg-green-800 p-1 w-full text-center px-3 rounded-md active:brightness-125 hover:brightness-110 uppercase'
 					onClick={() => {
-						setViewMode(!viewMode)
+						setViewSidebar(!viewSidebar)
 					}}
 				>
-					{'current view mode: ' + (viewMode ? 'group' : 'individual')}
+					{viewSidebar ? 'toggle sidebar' : '+'}
 				</button>
-				{/* SORT MODE */}
-				{/* TODO LOL */}
-
-				{/* DROPDOWNS */}
-				<div className='gap-2 flex flex-col'>
-					<DropDown
-						getter={trimColor}
-						setter={setTrimColor}
-						label='Trim Color'
-						items={['wawa', 'owoo']}
-						className='flex gap-2'
-					/>
-					<DropDown
-						getter={trimStyle}
-						setter={setTrimStyle}
-						label='Trim Style'
-						items={[]}
-						className='flex gap-2'
-					/>
-					<DropDown
-						getter={prototypeColor}
-						setter={setPrototypeColor}
-						label='Prototype Color'
-						items={[]}
-						className='flex gap-2'
-					/>
-				</div>
-
-				{/* HOW TO */}
-				<h1 className='text-2xl text-center'>HOW TO USE</h1>
-				<div className='font-atkinson flex flex-col gap-3'>
-					<Sidebar />
+				{/* SIDEBAR CONTENTS */}
+				<div
+					className={`w-72 bg-solid-light h-fit p-3 flex flex-col gap-4 rounded-md rounded-bl-3xl text-lime-100 ${
+						!viewSidebar && 'hidden'
+					}`}
+				>
+					{/* SEARCH */}
+					<div className='flex gap-2'>
+						<input
+							type='text'
+							placeholder='Search'
+							onKeyUp={(e) => setSearch(e.currentTarget.value)}
+							autoFocus
+							className='bg-solid-dark text-lime-200 outline-none px-2 py-1 rounded-md placeholder:text-lime-200/50 w-full'
+						/>
+						<button
+							className={`${
+								searchRegex ? 'bg-green-600' : 'bg-green-800'
+							} p-1 w-min text-center px-3 rounded-md hover:brightness-110 uppercase`}
+							onClick={() => {
+								setSearchRegex(!searchRegex)
+							}}
+							title='Regular Expression match'
+						>
+							.*
+						</button>
+					</div>
+					{/* VIEW MODE */}
+					<button
+						className='bg-green-800 p-1 w-full text-left px-3 rounded-md active:brightness-125 hover:brightness-110 capitalize'
+						onClick={() => {
+							setViewMode(!viewMode)
+						}}
+					>
+						{'current view mode: ' + (viewMode ? 'group' : 'individual')}
+					</button>
+					{/* SORT MODE */}
+					{/* TODO LOL */}
+					{/* DROPDOWNS */}
+					<h1 className='text-center text-xl font-thin capitalize'>
+						export options
+					</h1>
+					<div className='gap-2 flex flex-col'>
+						<DropDown
+							getter={trimColor}
+							setter={setTrimColor}
+							label='Trim Color'
+							items={Wad.trim.color}
+							storageKey='trim_color'
+							className='flex gap-2'
+						/>
+						<DropDown
+							getter={trimStyle}
+							setter={setTrimStyle}
+							label='Trim Style'
+							items={Wad.trim.style}
+							storageKey='trim_style'
+							className='flex gap-2'
+						/>
+						<DropDown
+							getter={prototypeColor}
+							setter={setPrototypeColor}
+							label='Prototype Color'
+							items={Wad.prototype.color}
+							storageKey='prototype_color'
+							className='flex gap-2'
+						/>
+					</div>
+					{/* HOW TO */}
+					<div className='font-atkinson flex flex-col gap-3'>
+						<h1 className='text-2xl text-center font-thin font-atkinson uppercase '>
+							how to use
+						</h1>
+						<SidebarMdx />
+					</div>
 				</div>
 			</div>
 
-			{viewMode ? (
-				// GROUP
-				<div className='flex flex-wrap gap-1.5 '>
-					{Object.values(uniqueGroups).map((v) => {
-						return (
-							// CARD
-							<div
-								key={v.group}
-								className='bg-emerald-950/50 p-1 w-56 h-56 justify-between flex flex-col rounded-md rounded-tr-[48px]'
-							>
-								<div className='text-center text-xl'>{v.group}</div>
-								{v.img && (
-									<img src={`img/${v.img}`} className='p-2 h-32 w-32 m-auto' />
-								)}
-								<div className='flex flex-wrap gap-1'>
-									{prefabsData.map((p) => {
-										if (p.group === v.group) {
-											return (
-												<CopyButton
-													obj={p}
-													className='bg-lime-600/50 select-none p-0.5 flex-grow w-16 min-w-16 rounded-md hover:bg-green-600 active:bg-lime-400 active:scale-90 transition duration-200'
-													key={p.dif}
-												/>
-											)
-										}
-									})}
-								</div>
-							</div>
-						)
-					})}
-				</div>
-			) : (
-				// INDIVIDUAL
-				<div className='flex flex-wrap gap-2'>
-					{prefabsData.map((v) => {
-						return (
-							// CARD
-							<div
-								className='p-1 bg-emerald-950 h-10 w-64 justify-between flex rounded-sm gap-2'
-								key={v.group + v.dif}
-							>
-								{v.img && (
-									<img
-										src={`img/${v.img}`}
-										height={'32px'}
-										width={'32px'}
-										className='p-0.5'
-									/>
-								)}
-
-								<CopyButton
-									text={v.group + (v.dif && ' — ' + v.dif)}
-									obj={v}
-									className='bg-emerald-800 w-full select-none hover:bg-emerald-700'
-									key={v.group + v.dif}
-								/>
-							</div>
-						)
-					})}
-				</div>
-			)}
+			{/* PREFABS */}
+			<div className='w-full'>
+				{viewMode ? (
+					// GROUP
+					<div className='flex flex-wrap gap-1.5'>
+						{Object.values(uniqueGroups).map((v) => {
+							return (
+								// CARD
+								searchMatch(v.group) && (
+									<div
+										key={v.group}
+										className='bg-solid-dark
+									p-1.5 w-48 h-72 justify-between flex flex-col rounded-md rounded-tr-3xl'
+									>
+										<div className='text-center text-xl'>{v.group}</div>
+										{v.img && (
+											<img
+												src={`img/${v.img}`}
+												className='h-32 w-32 m-auto p-1'
+											/>
+										)}
+										<div className='flex flex-wrap gap-1.5'>
+											{prefabsData.map((p) => {
+												if (p.group === v.group) {
+													return (
+														<CopyButton
+															obj={p}
+															callback={sendPrefab}
+															className='p-0.5 flex-grow w-16 min-w-16 rounded-md font-medium
+														 '
+															key={p.dif}
+														/>
+													)
+												}
+											})}
+										</div>
+									</div>
+								)
+							)
+						})}
+					</div>
+				) : (
+					// INDIVIDUAL
+					<div className='flex flex-wrap gap-2'>
+						{prefabsData.map((v) => {
+							return (
+								// CARD
+								searchMatch(v.group + v.dif) && (
+									<div
+										className='p-1 bg-solid-dark h-10 w-64 justify-between flex rounded-md gap-2 text-lg truncate'
+										key={v.group + v.dif}
+									>
+										{v.img && (
+											<img
+												src={`img/${v.img}`}
+												height={'32px'}
+												width={'32px'}
+												className='p-0.5'
+											/>
+										)}
+										<CopyButton
+											text={v.group + (v.dif && ' — ' + v.dif)}
+											obj={v}
+											callback={sendPrefab}
+											className='w-full truncate rounded-md'
+											key={v.group + v.dif}
+										/>
+									</div>
+								)
+							)
+						})}
+					</div>
+				)}
+			</div>
 		</div>
 	)
 }

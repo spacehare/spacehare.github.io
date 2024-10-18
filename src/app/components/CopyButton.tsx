@@ -3,20 +3,23 @@
 type Props = {
 	text?: string
 	obj: any
+	callback: Function
 	className: string
 }
 
-export default function ({ text, obj, className }: Props) {
-	let ex = text || obj.dif || '-'
+export default function ({ text, obj, callback, className }: Props) {
+	const label = text || obj.dif || '-'
 	return (
 		<button
-			className={className}
+			className={`${className} select-none bg-solid-light hover:brightness-150 active:brightness-200 active:scale-90 transition duration-100`}
 			key={obj.dif}
+			title={label}
 			onClick={() => {
-				navigator.clipboard.writeText(obj.data)
+				callback(obj.data)
+				// navigator.clipboard.writeText(obj.data)
 			}}
 		>
-			{text || obj.dif || '-'}
+			{label}
 		</button>
 	)
 }

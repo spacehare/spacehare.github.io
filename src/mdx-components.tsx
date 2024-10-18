@@ -6,7 +6,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		a: ({ href, children }) => (
 			<a
 				href={href}
-				className='text-lime-300 hover:text-lime-100 before:content-["🔗"] before:text-lg before:mr-2'
+				className='text-lime-300 hover:text-lime-100 before:content-["🔗"] before:text-md before:mr-2'
 			>
 				{children}
 			</a>
@@ -16,7 +16,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				{children}
 			</ul>
 		),
-		hr: () => <hr className='border-emerald-900' />,
+		hr: () => <hr className='border-emerald-700' />,
 		...components,
 	}
 }
