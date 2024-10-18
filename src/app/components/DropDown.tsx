@@ -2,6 +2,7 @@
 type Props = {
 	label: string
 	items: Array<string>
+	itemNames?: Array<string>
 	setter: any
 	getter: any
 	className?: string
@@ -11,6 +12,7 @@ type Props = {
 export default ({
 	label,
 	items,
+	itemNames,
 	setter,
 	getter,
 	className,
@@ -28,9 +30,9 @@ export default ({
 						localStorage.setItem(storageKey, e.currentTarget.value)
 				}}
 			>
-				{items.map((item) => (
-					<option value={item} content={item} className='bg-emerald-700'>
-						{item}
+				{items.map((item: string) => (
+					<option value={item} className='bg-solid-light'>
+						{itemNames ? itemNames[items.findIndex((v) => v === item)] : item}
 					</option>
 				))}
 			</select>

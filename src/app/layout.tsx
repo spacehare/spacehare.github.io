@@ -21,7 +21,7 @@ const roboto = Roboto_Flex({
 })
 
 const roboto_mono = Roboto_Mono({
-	weight: '100',
+	// weight: '100',
 	subsets: ['latin'],
 	variable: '--font-roboto-mono',
 })
@@ -39,7 +39,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={`${roboto.variable} ${roboto_mono.variable} ${atkinson.variable} font-sans text-lime-100 antialiased font-normal`}
+				className={`${roboto.variable} ${roboto_mono.variable} ${atkinson.variable} font-sans text-lime-100 antialiased font-normal bg-solid-med`}
 			>
 				{children}
 			</body>

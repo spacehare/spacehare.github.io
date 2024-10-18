@@ -16,7 +16,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				{children}
 			</ul>
 		),
-		hr: () => <hr className='border-emerald-700' />,
+		hr: () => <hr className='border-lime-200/25' />,
 		...components,
 	}
 }

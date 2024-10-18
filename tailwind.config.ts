@@ -8,9 +8,6 @@ const config: Config = {
     './src/mdx-components.tsx',
   ],
   theme: {
-    fontFamily: {
-      sans: ['var(--font-roboto)'],
-    },
     extend: {
       colors: {
         background: "var(--background)",
@@ -24,7 +21,9 @@ const config: Config = {
       fontFamily: {
         atkinson: ['var(--font-atkinson)'],
         roboto: ['var(--font-roboto)'],
-        robotoMono: ['var(--font-roboto-mono)']
+        robotoMono: ['var(--font-roboto-mono)'],
+        sans: ['var(--font-roboto)'],
+        mono: ['var(--font-roboto-mono)']
       }
     },
   },
