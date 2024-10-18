@@ -5,13 +5,22 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/mdx-components.tsx',
   ],
   theme: {
+    fontFamily: {
+      sans: ['var(--font-roboto)'],
+    },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        atkinson: ['var(--font-atkinson)'],
+        roboto: ['var(--font-roboto)'],
+        robotoMono: ['var(--font-roboto-mono)']
+      }
     },
   },
   plugins: [],

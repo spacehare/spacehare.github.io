@@ -7,6 +7,7 @@ type Props = {
 }
 
 export default function ({ text, obj, className }: Props) {
+	let ex = text || obj.dif || '-'
 	return (
 		<button
 			className={className}

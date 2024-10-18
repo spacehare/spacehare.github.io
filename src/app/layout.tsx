@@ -39,7 +39,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={`${roboto.className} ${roboto.variable} ${roboto_mono.variable} antialiased`}
+				className={`${roboto.variable} ${roboto_mono.variable} ${atkinson.variable} font-sans text-slate-50 antialiased`}
 			>
 				{children}
 			</body>
