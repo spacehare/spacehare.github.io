@@ -12,14 +12,16 @@ export default function Page() {
 	const [searchRegex, setSearchRegex] = useState(false)
 	const [viewMode, setViewMode] = useState(true)
 	const [viewSidebar, setViewSidebar] = useState(true)
+	// TODO useEffect
+	// -> https://sentry.io/answers/referenceerror-localstorage-is-not-defined-in-next-js/
 	const [trimColor, setTrimColor] = useState(
-		localStorage.getItem('trim_color') || Wad.default.trim.color
+		localStorage?.getItem('trim_color') || Wad.default.trim.color
 	)
 	const [trimStyle, setTrimStyle] = useState(
-		localStorage.getItem('trim_style') || Wad.default.trim.style
+		localStorage?.getItem('trim_style') || Wad.default.trim.style
 	)
 	const [prototypeColor, setPrototypeColor] = useState(
-		localStorage.getItem('prototype_color') || Wad.default.prototype.color
+		localStorage?.getItem('prototype_color') || Wad.default.prototype.color
 	)
 
 	const uniqueGroups = Array.from(
@@ -39,7 +41,7 @@ export default function Page() {
 	}
 
 	const sendPrefab = (data: string) => {
-		const output: string = JSON.parse(data)
+		const output: string = data
 			.replaceAll(Wad.default.trim.color, trimColor)
 			.replaceAll(Wad.default.trim.style, trimStyle)
 			.replaceAll(Wad.default.prototype.color, prototypeColor)
@@ -48,6 +50,108 @@ export default function Page() {
 
 		navigator.clipboard.writeText(output)
 	}
+
+	type GroupCreditProps = {
+		uGroup: any
+	}
+
+	const GroupCredit = ({ uGroup }: GroupCreditProps) => {
+		const l = []
+		return prefabsData.map((pre) => {
+			if (
+				pre.credit &&
+				pre.credit instanceof Array &&
+				l.length < 1 &&
+				pre.group === uGroup.group
+			) {
+				l.push(pre.credit)
+				return (
+					<div className='text-green-700 text-center font-atkinson'>
+						<span className='font-thin'>Credit: </span>
+						<span className='text-green-600 font-black'>
+							{pre.credit.join(', ')}
+						</span>
+					</div>
+				)
+			}
+		})
+	}
+
+	const GroupView = () => (
+		<div className='flex flex-wrap gap-1.5'>
+			{Object.values(uniqueGroups).map((uniqueGroup) => {
+				return (
+					// CARD
+					searchMatch(uniqueGroup.group) && (
+						<div
+							key={uniqueGroup.group}
+							className='bg-solid-dark justify-between flex flex-col
+								p-1.5 w-48 h-72 rounded-md rounded-tr-3xl'
+						>
+							<div className='text-center text-xl font-atkinson'>
+								{uniqueGroup.group}
+							</div>
+							{uniqueGroup.img && (
+								<img
+									src={`img/${uniqueGroup.img}`}
+									className='h-32 w-32 m-auto p-1'
+								/>
+							)}
+							<div>
+								<GroupCredit uGroup={uniqueGroup} />
+								<div className='flex flex-wrap gap-1.5'>
+									{prefabsData.map((pre) => {
+										if (pre.group === uniqueGroup.group) {
+											return (
+												<CopyButton
+													obj={pre}
+													callback={sendPrefab}
+													className='p-0.5 flex-grow w-16 min-w-16 rounded-md font-medium'
+													key={pre.dif}
+												/>
+											)
+										}
+									})}
+								</div>
+							</div>
+						</div>
+					)
+				)
+			})}
+		</div>
+	)
+
+	const IndividualView = () => (
+		<div className='flex flex-wrap gap-2'>
+			{prefabsData.map((v) => {
+				return (
+					// CARD
+					searchMatch(v.group + v.dif) && (
+						<div
+							className='p-1 bg-solid-dark h-10 w-64 justify-between flex rounded-md gap-2 text-lg truncate'
+							key={v.group + v.dif}
+						>
+							{v.img && (
+								<img
+									src={`img/${v.img}`}
+									height={'32px'}
+									width={'32px'}
+									className='p-0.5'
+								/>
+							)}
+							<CopyButton
+								text={v.group + (v.dif && ' — ' + v.dif)}
+								obj={v}
+								callback={sendPrefab}
+								className='w-full truncate rounded-md'
+								key={v.group + v.dif}
+							/>
+						</div>
+					)
+				)
+			})}
+		</div>
+	)
 
 	return (
 		// PAGE
@@ -143,77 +247,7 @@ export default function Page() {
 
 			{/* PREFABS */}
 			<div className='w-full'>
-				{viewMode ? (
-					// GROUP
-					<div className='flex flex-wrap gap-1.5'>
-						{Object.values(uniqueGroups).map((v) => {
-							return (
-								// CARD
-								searchMatch(v.group) && (
-									<div
-										key={v.group}
-										className='bg-solid-dark
-									p-1.5 w-48 h-72 justify-between flex flex-col rounded-md rounded-tr-3xl'
-									>
-										<div className='text-center text-xl'>{v.group}</div>
-										{v.img && (
-											<img
-												src={`img/${v.img}`}
-												className='h-32 w-32 m-auto p-1'
-											/>
-										)}
-										<div className='flex flex-wrap gap-1.5'>
-											{prefabsData.map((p) => {
-												if (p.group === v.group) {
-													return (
-														<CopyButton
-															obj={p}
-															callback={sendPrefab}
-															className='p-0.5 flex-grow w-16 min-w-16 rounded-md font-medium
-														 '
-															key={p.dif}
-														/>
-													)
-												}
-											})}
-										</div>
-									</div>
-								)
-							)
-						})}
-					</div>
-				) : (
-					// INDIVIDUAL
-					<div className='flex flex-wrap gap-2'>
-						{prefabsData.map((v) => {
-							return (
-								// CARD
-								searchMatch(v.group + v.dif) && (
-									<div
-										className='p-1 bg-solid-dark h-10 w-64 justify-between flex rounded-md gap-2 text-lg truncate'
-										key={v.group + v.dif}
-									>
-										{v.img && (
-											<img
-												src={`img/${v.img}`}
-												height={'32px'}
-												width={'32px'}
-												className='p-0.5'
-											/>
-										)}
-										<CopyButton
-											text={v.group + (v.dif && ' — ' + v.dif)}
-											obj={v}
-											callback={sendPrefab}
-											className='w-full truncate rounded-md'
-											key={v.group + v.dif}
-										/>
-									</div>
-								)
-							)
-						})}
-					</div>
-				)}
+				{viewMode ? <GroupView /> : <IndividualView />}
 			</div>
 		</div>
 	)

@@ -14,9 +14,8 @@ export default function ({ text, obj, callback, className }: Props) {
 			className={`${className} select-none bg-solid-light hover:brightness-150 active:brightness-200 active:scale-90 transition duration-100`}
 			key={obj.dif}
 			title={label}
-			onClick={() => {
+			onMouseDown={() => {
 				callback(obj.data)
-				// navigator.clipboard.writeText(obj.data)
 			}}
 		>
 			{label}
