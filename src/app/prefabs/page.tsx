@@ -15,13 +15,13 @@ export default function Page() {
 	// TODO useEffect
 	// -> https://sentry.io/answers/referenceerror-localstorage-is-not-defined-in-next-js/
 	const [trimColor, setTrimColor] = useState(
-		localStorage?.getItem('trim_color') || Wad.default.trim.color
+		localStorage.getItem('trim_color') || Wad.default.trim.color
 	)
 	const [trimStyle, setTrimStyle] = useState(
-		localStorage?.getItem('trim_style') || Wad.default.trim.style
+		localStorage.getItem('trim_style') || Wad.default.trim.style
 	)
 	const [prototypeColor, setPrototypeColor] = useState(
-		localStorage?.getItem('prototype_color') || Wad.default.prototype.color
+		localStorage.getItem('prototype_color') || Wad.default.prototype.color
 	)
 
 	const uniqueGroups = Array.from(
@@ -207,7 +207,7 @@ export default function Page() {
 					{/* TODO LOL */}
 					{/* DROPDOWNS */}
 					<h1 className='text-center text-xl font-thin capitalize'>
-						export options
+						clipboard export options
 					</h1>
 					<div className='gap-2 flex flex-col'>
 						<DropDown

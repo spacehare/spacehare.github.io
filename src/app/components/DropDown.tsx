@@ -31,7 +31,7 @@ export default ({
 				}}
 			>
 				{items.map((item: string) => (
-					<option value={item} className='bg-solid-light'>
+					<option value={item} className='bg-solid-light' key={item}>
 						{itemNames ? itemNames[items.findIndex((v) => v === item)] : item}
 					</option>
 				))}
