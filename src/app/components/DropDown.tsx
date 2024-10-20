@@ -1,4 +1,6 @@
 'use client'
+import { useEffect } from 'react'
+
 type Props = {
 	label: string
 	items: Array<string>
@@ -18,6 +20,10 @@ export default ({
 	className,
 	storageKey,
 }: Props) => {
+	if (storageKey)
+		useEffect(() => {
+			setter(localStorage.getItem(storageKey) || items[0])
+		}, [getter])
 	return (
 		<div className={className}>
 			<div className='w-full text-right m-auto'>{label}</div>

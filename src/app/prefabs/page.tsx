@@ -3,7 +3,7 @@
 import prefabsData from '@/app/assets/prefabs/prefabs.json'
 import CopyButton from '../components/CopyButton'
 import SidebarMdx from './sidebar.mdx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DropDown from '../components/DropDown'
 import Wad from '@/app/assets/prefabs/wad.json'
 
@@ -12,17 +12,9 @@ export default function Page() {
 	const [searchRegex, setSearchRegex] = useState(false)
 	const [viewMode, setViewMode] = useState(true)
 	const [viewSidebar, setViewSidebar] = useState(true)
-	// TODO useEffect
-	// -> https://sentry.io/answers/referenceerror-localstorage-is-not-defined-in-next-js/
-	const [trimColor, setTrimColor] = useState(
-		localStorage.getItem('trim_color') || Wad.default.trim.color
-	)
-	const [trimStyle, setTrimStyle] = useState(
-		localStorage.getItem('trim_style') || Wad.default.trim.style
-	)
-	const [prototypeColor, setPrototypeColor] = useState(
-		localStorage.getItem('prototype_color') || Wad.default.prototype.color
-	)
+	const [trimColor, setTrimColor] = useState('')
+	const [trimStyle, setTrimStyle] = useState('')
+	const [prototypeColor, setPrototypeColor] = useState('')
 
 	const uniqueGroups = Array.from(
 		new Map(
@@ -66,7 +58,10 @@ export default function Page() {
 			) {
 				l.push(pre.credit)
 				return (
-					<div className='text-green-700 text-center font-atkinson'>
+					<div
+						className='text-green-700 text-center font-atkinson'
+						key={pre.credit.toString() + pre.group}
+					>
 						<span className='font-thin'>Credit: </span>
 						<span className='text-green-600 font-black'>
 							{pre.credit.join(', ')}

@@ -8,6 +8,7 @@ import { KeyboardEvent } from 'react'
 import { text } from 'stream/consumers'
 
 export default function Page() {
+	const validChars = /^[a-zA-Z0-9#-\s]$/
 	const valid =
 		/^[a-zA-Z0-9#-\s]$|Shift|Backspace|Delete|Space|Arrow|Home|End|Tab/
 	const [color, setColor] = useState('black 1')
@@ -131,8 +132,11 @@ export default function Page() {
 							/>
 						</div>
 						<button
-							className='flex flex-col bg-green-700 p-2 rounded-md w-64 [&_*]:text-center [&_*]:w-full hover:bg-green-600 active:bg-green-500 active:scale-90 transition text-md'
+							className='flex flex-col bg-green-700 p-2 rounded-md w-64 [&_*]:text-center [&_*]:w-full transition text-md 
+							enabled:hover:bg-green-600 enabled:active:bg-green-500 enabled:active:scale-90
+							disabled:opacity-70'
 							onClick={generateBrush}
+							disabled={textInput == ''}
 						>
 							<span className='capitalize'>generate & copy</span>
 							<span className='opacity-60 uppercase'>(enter)</span>
@@ -161,7 +165,7 @@ export default function Page() {
 						<div className='flex flex-col'>
 							<h2 className='font-thin text-lg text-center'>valid regex</h2>
 							<div className='font-robotoMono font-light text-md text-lime-200 text-center text-nowrap'>
-								{String(valid)}
+								{String(validChars)}
 							</div>
 						</div>
 					</div>
