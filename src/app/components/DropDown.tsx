@@ -5,13 +5,13 @@ type Props = {
 	label: string
 	items: Array<string>
 	itemNames?: Array<string>
-	setter: any
-	getter: any
+	setter: (val: string) => void
+	getter: string
 	className?: string
 	storageKey?: string
 }
 
-export default ({
+export default function DropDown({
 	label,
 	items,
 	itemNames,
@@ -19,11 +19,10 @@ export default ({
 	getter,
 	className,
 	storageKey,
-}: Props) => {
-	if (storageKey)
-		useEffect(() => {
-			setter(localStorage.getItem(storageKey) || items[0])
-		}, [getter])
+}: Props) {
+	useEffect(() => {
+		if (storageKey) setter(localStorage.getItem(storageKey) || items[0])
+	}, [setter, items, getter, storageKey])
 	return (
 		<div className={className}>
 			<div className='w-full text-right m-auto'>{label}</div>

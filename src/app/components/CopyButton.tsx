@@ -2,12 +2,12 @@
 
 type Props = {
 	text?: string
-	obj: any
-	callback: Function
+	obj: { dif: string; data: string }
+	callback: (data: string) => void
 	className: string
 }
 
-export default function ({ text, obj, callback, className }: Props) {
+export default function CopyButton({ text, obj, callback, className }: Props) {
 	const label = text || obj.dif || '-'
 	return (
 		<button

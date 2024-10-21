@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import HomeLink from './components/HomeLink'
 
 export default function NotFound() {
