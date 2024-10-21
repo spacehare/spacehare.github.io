@@ -6,6 +6,7 @@ import SidebarMdx from './sidebar.mdx'
 import { useEffect, useState } from 'react'
 import DropDown from '../components/DropDown'
 import Wad from '@/app/assets/prefabs/wad.json'
+import Image from 'next/image'
 
 export default function Page() {
 	const [search, setSearch] = useState('')
@@ -81,17 +82,25 @@ export default function Page() {
 						<div
 							key={uniqueGroup.group}
 							className='bg-solid-dark justify-between flex flex-col
-								p-1.5 w-48 h-72 rounded-md rounded-tr-3xl'
+								p-1.5 w-48 h-60 rounded-md rounded-tr-3xl'
 						>
-							<div className='text-center text-xl font-atkinson'>
-								{uniqueGroup.group}
+							<div className='flex flex-col items-center'>
+								<div className='text-center text-xl font-atkinson'>
+									{uniqueGroup.group}
+								</div>
+								{uniqueGroup.img && (
+									<div className=''>
+										<Image
+											src={`img/${uniqueGroup.img}`}
+											className='p-1.5'
+											// fill={true}
+											width={100}
+											height={100}
+											alt={`a 2d SVG preview for the 3d brush group named ${uniqueGroup.group}`}
+										/>
+									</div>
+								)}
 							</div>
-							{uniqueGroup.img && (
-								<img
-									src={`img/${uniqueGroup.img}`}
-									className='h-32 w-32 m-auto p-1'
-								/>
-							)}
 							<div>
 								<GroupCredit uGroup={uniqueGroup} />
 								<div className='flex flex-wrap gap-1.5'>
