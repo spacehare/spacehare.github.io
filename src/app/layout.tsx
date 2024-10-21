@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+// import localFont from 'next/font/local'
 import {
 	Atkinson_Hyperlegible,
 	Roboto_Flex,

@@ -3,7 +3,7 @@
 import prefabsData from '@/app/assets/prefabs/prefabs.json'
 import CopyButton from '../components/CopyButton'
 import SidebarMdx from './sidebar.mdx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import DropDown from '../components/DropDown'
 import Wad from '@/app/assets/prefabs/wad.json'
 import Image from 'next/image'
@@ -45,7 +45,7 @@ export default function Page() {
 	}
 
 	type GroupCreditProps = {
-		uGroup: any
+		uGroup: { group: string }
 	}
 
 	const GroupCredit = ({ uGroup }: GroupCreditProps) => {

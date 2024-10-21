@@ -7,6 +7,9 @@ import ValidDisplay from './valid.mdx'
 import { KeyboardEvent } from 'react'
 
 export default function Page() {
+	const templates: Record<string, string> = Tech.templates
+	const chars: Record<string, { x: number; y: number }> = Tech.chars
+
 	const validChars = /^[a-zA-Z0-9#-\s]$/
 	const valid =
 		/^[a-zA-Z0-9#-\s]$|Shift|Backspace|Delete|Space|Arrow|Home|End|Tab/
@@ -29,13 +32,10 @@ export default function Page() {
 		if (textInput == '') return
 		let output = '{\n"classname" "func_detail_illusionary"\n"_noclipfaces" "1"'
 
-		const currentStyle = Tech.styles.find((a) => a.name === style)
-		const currentColor = Tech.colors.find((a) => a.tex === color)
-		console.log(style, color)
-		console.log(currentStyle, currentColor)
-		if (!currentStyle) return
-		if (!currentColor) return
-		let template: string = Tech.templates[currentStyle.template]
+		const currentStyle = Tech.styles.find((a) => a.name === style)!
+		const currentColor = Tech.colors.find((a) => a.tex === color)!
+
+		const template: string = templates[currentStyle.template]
 			.replace(Tech.default.style, currentStyle.style)
 			.replace(Tech.default.color, currentColor.tex)
 		//
@@ -43,11 +43,11 @@ export default function Page() {
 
 		// char loop
 		for (const [index, char] of Array.from(textInput).entries()) {
-			if (!Object.keys(Tech.chars).includes(char)) {
+			if (!Object.keys(chars).includes(char)) {
 				continue
 			}
 
-			let brush = template
+			const brush = template
 				// verticies
 				.replace(regex.xVerts, (m) => {
 					return (
@@ -60,13 +60,13 @@ export default function Page() {
 				.replace(
 					regex.offset.x,
 					(
-						(Tech.chars[char].x - index * multiplier) *
+						(chars[char].x - index * multiplier) *
 						currentStyle.char_size
 					).toString()
 				)
 				.replace(
 					regex.offset.y,
-					(Tech.chars[char].y * currentStyle.char_size).toString()
+					(chars[char].y * currentStyle.char_size).toString()
 				)
 			output += brush
 		}
