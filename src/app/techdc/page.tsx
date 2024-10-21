@@ -1,11 +1,10 @@
 'use client'
 import DropDown from '../components/DropDown'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Tech from '@/app/assets/techdc/techdc.json'
 import HomeLink from '../components/HomeLink'
 import ValidDisplay from './valid.mdx'
 import { KeyboardEvent } from 'react'
-import { text } from 'stream/consumers'
 
 export default function Page() {
 	const validChars = /^[a-zA-Z0-9#-\s]$/
@@ -14,8 +13,9 @@ export default function Page() {
 	const [color, setColor] = useState('black 1')
 	const [style, setStyle] = useState('techdc1')
 	const [textInput, setTextInput] = useState('')
+	const [copied, setCopied] = useState(false)
 	const [preview, setPreview] = useState(
-		'Hi! After downloading the edited WAD below (in the page footer), type something in the box above to generate a brush for TrenchBroom.\n'
+		'Hi! After downloading the edited WAD below (in the page footer), type something in the box above, then click the button to generate a brush for TrenchBroom.\n\nThe brush will be automatically copied to your clipboard.'
 	)
 	const regex = {
 		offset: {
@@ -74,6 +74,7 @@ export default function Page() {
 
 		setPreview(output)
 		navigator.clipboard.writeText(output)
+		setCopied(true)
 	}
 
 	const handleInput = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -85,6 +86,13 @@ export default function Page() {
 			event.preventDefault()
 		}
 	}
+
+	useEffect(() => {
+		if (copied)
+			setTimeout(() => {
+				setCopied(false)
+			}, 2500)
+	}, [copied])
 
 	return (
 		<div className='h-screen p-3'>
@@ -132,14 +140,21 @@ export default function Page() {
 							/>
 						</div>
 						<button
-							className='flex flex-col bg-green-700 p-2 rounded-md w-64 [&_*]:text-center [&_*]:w-full transition text-md 
+							className='flex flex-col justify-center items-center
+							bg-green-700 p-2 rounded-md w-64 [&_*]:text-center [&_*]:w-full transition text-md 
 							enabled:hover:bg-green-600 enabled:active:bg-green-500 enabled:active:scale-90
 							disabled:opacity-70'
 							onClick={generateBrush}
 							disabled={textInput == ''}
 						>
-							<span className='capitalize'>generate & copy</span>
-							<span className='opacity-60 uppercase'>(enter)</span>
+							{copied ? (
+								<span>COPIED TO CLIPBOARD!</span>
+							) : (
+								<>
+									<span className='capitalize'>generate & copy</span>
+									<span className='opacity-60 uppercase'>(enter)</span>
+								</>
+							)}
 						</button>
 					</div>
 				</div>
