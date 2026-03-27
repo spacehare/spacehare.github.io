@@ -8,6 +8,7 @@ import CopyButton from '../components/CopyButton'
 import { PrefabContext } from './prefabContext'
 import Sidebar from './Sidebar'
 import { Prefab } from './types/Prefab'
+import { PrefabFamily } from './types/PrefabFamily'
 import { PrefabRaw } from './types/PrefabRaw'
 
 type props = {
@@ -15,23 +16,25 @@ type props = {
 }
 
 export default function Content({ defaultPrefabsURL }: props) {
-    const [prefabsData, setPrefabsData] = useState<Array<Prefab> | null>(null)
+    // const [prefabsData, setPrefabsData] = useState<Array<Prefab> | null>(null)
     const localFallbackURL = '/prefabs - prefabs.tsv'
     const [isLoading, setLoading] = useState(true)
     const ctx = useContext(PrefabContext)
-    if (!ctx) {
-        return
-    }
+    if (!ctx) return
+
     const [search] = ctx.search
     const [searchRegex] = ctx.searchRegex
     const [viewMode] = ctx.viewMode
     const [prototypeColor] = ctx.prototypeColor
     const [trimColor] = ctx.trimColor
     const [trimStyle] = ctx.trimStyle
+    const [families, setFamilies] = ctx.families
+    const MakeFamilies = ctx.MakeFamilies
 
     function SingleDataToReal(row: PrefabRaw) {
         const parsed_entity: string = JSON.parse(row.entity_string_json)
         const parsed_credit: string[] = row.credit_json_array ? JSON.parse(row.credit_json_array) : null
+
         const output: Prefab = { ...row, entity_string: parsed_entity, credit: parsed_credit }
         return output
     }
@@ -46,10 +49,18 @@ export default function Content({ defaultPrefabsURL }: props) {
             skipEmptyLines: true,
             quoteChar: '',
             complete: (results) => {
-                setPrefabsData(AllDataToReal(results.data as Array<PrefabRaw>))
+                MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), 'DEBUGTEST')
                 setLoading(false)
             },
         })
+    }
+
+    function GetAllPrefabs() {
+        return families
+            .map((family) => {
+                return family.prefabs
+            })
+            .flat()
     }
 
     useEffect(() => {
@@ -62,7 +73,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                         skipEmptyLines: true,
                         quoteChar: '',
                         complete: (results) => {
-                            setPrefabsData(AllDataToReal(results.data as Array<PrefabRaw>))
+                            MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), localFallbackURL)
                             setLoading(false)
                         },
                     })
@@ -84,7 +95,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                         loadFallback()
                     },
                     complete: (results) => {
-                        setPrefabsData(AllDataToReal(results.data as Array<PrefabRaw>))
+                        MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), defaultPrefabsURL)
                         setLoading(false)
                     },
                 })
@@ -97,10 +108,15 @@ export default function Content({ defaultPrefabsURL }: props) {
 
     if (isLoading) return <div className='flex justify-center items-center h-screen'>Loading</div>
 
-    if (!prefabsData) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
+    if (!families) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
 
+    // FIXME
+    // there is some kind of bug like...
+    // if a group has a matching name even if it's in a different family, it will get overriden
     const uniqueGroups = Array.from(
-        new Map(prefabsData.map((v: Prefab) => [v.group, { group: v.group, img: v.img_url }])).values(),
+        new Map(
+            GetAllPrefabs().map((prefab: Prefab) => [prefab.group, { group: prefab.group, img: prefab.img_url }]),
+        ).values(),
     )
 
     const SearchMatch = (val: string) => {
@@ -118,7 +134,7 @@ export default function Content({ defaultPrefabsURL }: props) {
             .replaceAll(Wad.default.trim.color, trimColor)
             .replaceAll(Wad.default.trim.style, trimStyle)
             .replaceAll(Wad.default.prototype.color, prototypeColor)
-            .replaceAll('@@@_REPLACE_ME_@@@', Date.now().toString())
+            .replaceAll('@@@_REPLACE_ME_@@@', Date.now().toString()) // TODO regex find the tb_id and tb_group
             .replaceAll('__TB_empty', `128_${prototypeColor}_3`)
 
         navigator.clipboard.writeText(output)
@@ -130,7 +146,7 @@ export default function Content({ defaultPrefabsURL }: props) {
 
     const GroupCredit = ({ uGroup }: GroupCreditProps) => {
         const l = []
-        return prefabsData.map((pre: Prefab) => {
+        return GetAllPrefabs().map((pre: Prefab) => {
             if (pre.credit && pre.credit instanceof Array && l.length < 1 && pre.group === uGroup.group) {
                 l.push(pre.credit)
                 return (
@@ -173,7 +189,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                             <div>
                                 <GroupCredit uGroup={uniqueGroup} />
                                 <div className='flex flex-wrap gap-1.5'>
-                                    {prefabsData.map((pre: Prefab) => {
+                                    {GetAllPrefabs().map((pre: Prefab) => {
                                         if (pre.group === uniqueGroup.group) {
                                             return (
                                                 <CopyButton
@@ -196,7 +212,7 @@ export default function Content({ defaultPrefabsURL }: props) {
 
     const IndividualView = () => (
         <div className='flex flex-wrap gap-2'>
-            {prefabsData.map((v: Prefab) => {
+            {GetAllPrefabs().map((v: Prefab) => {
                 return (
                     // CARD
                     SearchMatch(v.group + v.dif) && (

@@ -1,6 +1,7 @@
 import Wad from '@/app/assets/prefabs/wad.json'
 import { useContext } from 'react'
 import DropDown from '../components/DropDown'
+import { FamiliesPanel } from './FamiliesPanel'
 import { PrefabContext } from './prefabContext'
 import SidebarMdx from './sidebar.mdx'
 
@@ -17,6 +18,7 @@ export default function Sidebar() {
     const [trimColor, setTrimColor] = ctx.trimColor
     const [trimStyle, setTrimStyle] = ctx.trimStyle
     const [viewSidebar, setViewSidebar] = ctx.viewSidebar
+    const [families, setFamilies] = ctx.families
 
     return (
         <div className='flex flex-col gap-3 sticky top-2'>
@@ -98,6 +100,9 @@ export default function Sidebar() {
                         className='flex gap-2'
                     />
                 </div>
+
+                {/* FAMILIES */}
+                <FamiliesPanel families={families} />
 
                 {/* HOW TO */}
                 <div className='font-atkinson flex flex-col gap-3'>
