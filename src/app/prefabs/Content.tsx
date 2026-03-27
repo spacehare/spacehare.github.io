@@ -1,15 +1,13 @@
 'use client'
 
 import Wad from '@/app/assets/prefabs/wad.json'
-import Image from 'next/image'
 import Papa from 'papaparse'
 import { useContext, useEffect, useState } from 'react'
-import CopyButton from '../components/CopyButton'
 import { PrefabContext } from './prefabContext'
 import Sidebar from './Sidebar'
 import { Prefab } from './types/Prefab'
-import { PrefabFamily } from './types/PrefabFamily'
 import { PrefabRaw } from './types/PrefabRaw'
+import GroupView from './ViewGroup'
 import { IndividualView } from './ViewIndividual'
 
 type props = {
@@ -44,13 +42,13 @@ export default function Content({ defaultPrefabsURL }: props) {
         return data.map((raw: PrefabRaw) => SingleDataToReal(raw))
     }
 
-    function Parse(text: string): void {
+    function Parse(text: string, source: string): void {
         Papa.parse(text, {
             header: true,
             skipEmptyLines: true,
             quoteChar: '',
             complete: (results) => {
-                MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), 'DEBUGTEST')
+                MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), source)
                 setLoading(false)
             },
         })
@@ -111,15 +109,6 @@ export default function Content({ defaultPrefabsURL }: props) {
 
     if (!families) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
 
-    // FIXME
-    // there is some kind of behavior like...
-    // if a prefab shares a group name, it will merge to another group within a different family!
-    const uniqueGroups = Array.from(
-        new Map(
-            GetAllPrefabs().map((prefab: Prefab) => [prefab.group, { group: prefab.group, img: prefab.img_url }]),
-        ).values(),
-    )
-
     const SearchMatch = (val: string) => {
         if (searchRegex) {
             return val.match(search)
@@ -141,79 +130,6 @@ export default function Content({ defaultPrefabsURL }: props) {
         navigator.clipboard.writeText(output)
     }
 
-    type GroupCreditProps = {
-        uGroup: { group: string }
-    }
-
-    const GroupCredit = ({ uGroup }: GroupCreditProps) => {
-        const l = []
-        return GetAllPrefabs().map((pre: Prefab) => {
-            if (pre.credit && pre.credit instanceof Array && l.length < 1 && pre.group === uGroup.group) {
-                l.push(pre.credit)
-                return (
-                    <div
-                        className='text-green-700 text-center font-atkinson'
-                        key={pre.credit.toString() + pre.group + pre.family}
-                    >
-                        <span className='font-thin'>Credit: </span>
-                        <span className='text-green-600 font-black'>{pre.credit.join(', ')}</span>
-                    </div>
-                )
-            }
-        })
-    }
-
-    const GroupView = () => (
-        <div className='flex flex-wrap gap-1.5'>
-            {Object.values(uniqueGroups).map((uniqueGroup) => {
-                return (
-                    // CARD
-                    SearchMatch(uniqueGroup.group) && (
-                        <div
-                            key={uniqueGroup.group}
-                            className='bg-solid-dark justify-between flex flex-col
-								p-1.5 w-48 h-60 rounded-md rounded-tr-3xl'
-                        >
-                            <div className='flex flex-col items-center'>
-                                <div className='text-center text-xl font-atkinson'>{uniqueGroup.group}</div>
-                                {uniqueGroup.img && (
-                                    <div className=''>
-                                        <Image
-                                            loading='eager'
-                                            src={`${uniqueGroup.img}`}
-                                            className='p-1.5'
-                                            // fill={true}
-                                            width={100}
-                                            height={100}
-                                            alt={`a 2d SVG preview for ${uniqueGroup.group}`}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                            <div>
-                                <GroupCredit uGroup={uniqueGroup} />
-                                <div className='flex flex-wrap gap-1.5'>
-                                    {GetAllPrefabs().map((pre: Prefab) => {
-                                        if (pre.group === uniqueGroup.group) {
-                                            return (
-                                                <CopyButton
-                                                    prefab={pre}
-                                                    callback={SendPrefab}
-                                                    className='p-0.5 flex-grow w-16 min-w-16 rounded-md font-medium'
-                                                    key={pre.family + pre.group + pre.dif}
-                                                />
-                                            )
-                                        }
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                )
-            })}
-        </div>
-    )
-
     return (
         // PAGE
         <div className='flex gap-2 p-2 justify-between items-start bg-solid-med min-h-screen font-normal'>
@@ -221,7 +137,7 @@ export default function Content({ defaultPrefabsURL }: props) {
             {/* PREFABS */}
             <div className='w-full'>
                 {viewMode ? (
-                    <GroupView />
+                    <GroupView allPrefabs={GetAllPrefabs()} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
                 ) : (
                     <IndividualView allPrefabs={GetAllPrefabs()} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
                 )}
