@@ -7,20 +7,8 @@ import { useContext, useEffect, useState } from 'react'
 import CopyButton from '../components/CopyButton'
 import { PrefabContext } from './prefabContext'
 import Sidebar from './Sidebar'
-
-export type PrefabRaw = {
-    fam: string
-    group: string
-    dif: string
-    img: string
-    credit: string | Array<string>
-    devNote: string
-    entity_string_json: string
-}
-
-export type Prefab = Omit<PrefabRaw, 'entity_string_json'> & {
-    entity_string: string
-}
+import { Prefab } from './types/Prefab'
+import { PrefabRaw } from './types/PrefabRaw'
 
 type props = {
     defaultPrefabsURL: string
@@ -42,13 +30,26 @@ export default function Content({ defaultPrefabsURL }: props) {
     const [trimStyle] = ctx.trimStyle
 
     function SingleDataToReal(row: PrefabRaw) {
-        const parsed: string = JSON.parse(row.entity_string_json)
-        const output: Prefab = { ...row, entity_string: parsed }
+        const parsed_entity: string = JSON.parse(row.entity_string_json)
+        const parsed_credit: string[] = row.credit_json_array ? JSON.parse(row.credit_json_array) : null
+        const output: Prefab = { ...row, entity_string: parsed_entity, credit: parsed_credit }
         return output
     }
 
-    function AllDataToReal(data: Array<PrefabRaw>) {
+    function AllDataToReal(data: Array<PrefabRaw>): Array<Prefab> {
         return data.map((raw: PrefabRaw) => SingleDataToReal(raw))
+    }
+
+    function Parse(text: string): void {
+        Papa.parse(text, {
+            header: true,
+            skipEmptyLines: true,
+            quoteChar: '',
+            complete: (results) => {
+                setPrefabsData(AllDataToReal(results.data as Array<PrefabRaw>))
+                setLoading(false)
+            },
+        })
     }
 
     useEffect(() => {
@@ -62,9 +63,9 @@ export default function Content({ defaultPrefabsURL }: props) {
                         quoteChar: '',
                         complete: (results) => {
                             setPrefabsData(AllDataToReal(results.data as Array<PrefabRaw>))
+                            setLoading(false)
                         },
                     })
-                    setLoading(false)
                 })
         }
 
@@ -99,7 +100,7 @@ export default function Content({ defaultPrefabsURL }: props) {
     if (!prefabsData) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
 
     const uniqueGroups = Array.from(
-        new Map(prefabsData.map((v: Prefab) => [v.group, { group: v.group, img: v.img }])).values(),
+        new Map(prefabsData.map((v: Prefab) => [v.group, { group: v.group, img: v.img_url }])).values(),
     )
 
     const SearchMatch = (val: string) => {
@@ -203,7 +204,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                             className='p-1 bg-solid-dark h-10 w-64 justify-between flex rounded-md gap-2 text-lg truncate'
                             key={v.group + v.dif}
                         >
-                            {v.img && <img src={`${v.img}`} height={'32px'} width={'32px'} className='p-0.5' />}
+                            {v.img_url && <img src={`${v.img_url}`} height={'32px'} width={'32px'} className='p-0.5' />}
                             <CopyButton
                                 text={v.group + (v.dif && ' — ' + v.dif)}
                                 prefab={v}

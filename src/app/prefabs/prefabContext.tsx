@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { Prefab } from './types/Prefab'
 
 export const PrefabContext = createContext<PrefabContextValue | null>(null)
 
@@ -23,6 +24,8 @@ export function PrefabProvider({ children }: { children: React.ReactNode }) {
     const [trimColor, setTrimColor] = useState('')
     const [trimStyle, setTrimStyle] = useState('')
     const [prototypeColor, setPrototypeColor] = useState('')
+    // const [dataSourceURL, setDataSourceURL] = useState('')
+    const [dataSources, setDataSources] = useState<Prefab[] | null>(null)
 
     const value: PrefabContextValue = {
         search: [search, setSearch],

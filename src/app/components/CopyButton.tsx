@@ -1,6 +1,6 @@
 'use client'
 
-import { Prefab } from '../prefabs/Content'
+import { Prefab } from '../prefabs/types/Prefab'
 
 type Props = {
     text?: string
