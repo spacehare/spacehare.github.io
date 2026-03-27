@@ -1,0 +1,7 @@
+{
+	"quoteProps": "preserve",
+	"jsxSingleQuote": true,
+	"singleQuote": true,
+	"semi": false,
+	"tabWidth": 4
+}
