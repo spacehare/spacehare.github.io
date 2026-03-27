@@ -10,6 +10,7 @@ import Sidebar from './Sidebar'
 import { Prefab } from './types/Prefab'
 import { PrefabFamily } from './types/PrefabFamily'
 import { PrefabRaw } from './types/PrefabRaw'
+import { IndividualView } from './ViewIndividual'
 
 type props = {
     defaultPrefabsURL: string
@@ -111,8 +112,8 @@ export default function Content({ defaultPrefabsURL }: props) {
     if (!families) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
 
     // FIXME
-    // there is some kind of bug like...
-    // if a group has a matching name even if it's in a different family, it will get overriden
+    // there is some kind of behavior like...
+    // if a prefab shares a group name, it will merge to another group within a different family!
     const uniqueGroups = Array.from(
         new Map(
             GetAllPrefabs().map((prefab: Prefab) => [prefab.group, { group: prefab.group, img: prefab.img_url }]),
@@ -129,7 +130,7 @@ export default function Content({ defaultPrefabsURL }: props) {
         }
     }
 
-    function SendPrefab(data: string) {
+    function SendPrefab(data: string): void {
         const output: string = data
             .replaceAll(Wad.default.trim.color, trimColor)
             .replaceAll(Wad.default.trim.style, trimStyle)
@@ -150,7 +151,10 @@ export default function Content({ defaultPrefabsURL }: props) {
             if (pre.credit && pre.credit instanceof Array && l.length < 1 && pre.group === uGroup.group) {
                 l.push(pre.credit)
                 return (
-                    <div className='text-green-700 text-center font-atkinson' key={pre.credit.toString() + pre.group}>
+                    <div
+                        className='text-green-700 text-center font-atkinson'
+                        key={pre.credit.toString() + pre.group + pre.family}
+                    >
                         <span className='font-thin'>Credit: </span>
                         <span className='text-green-600 font-black'>{pre.credit.join(', ')}</span>
                     </div>
@@ -181,7 +185,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                                             // fill={true}
                                             width={100}
                                             height={100}
-                                            alt={`a 2d SVG preview for the 3d brush group named ${uniqueGroup.group}`}
+                                            alt={`a 2d SVG preview for ${uniqueGroup.group}`}
                                         />
                                     </div>
                                 )}
@@ -196,7 +200,7 @@ export default function Content({ defaultPrefabsURL }: props) {
                                                     prefab={pre}
                                                     callback={SendPrefab}
                                                     className='p-0.5 flex-grow w-16 min-w-16 rounded-md font-medium'
-                                                    key={pre.dif}
+                                                    key={pre.family + pre.group + pre.dif}
                                                 />
                                             )
                                         }
@@ -210,37 +214,18 @@ export default function Content({ defaultPrefabsURL }: props) {
         </div>
     )
 
-    const IndividualView = () => (
-        <div className='flex flex-wrap gap-2'>
-            {GetAllPrefabs().map((v: Prefab) => {
-                return (
-                    // CARD
-                    SearchMatch(v.group + v.dif) && (
-                        <div
-                            className='p-1 bg-solid-dark h-10 w-64 justify-between flex rounded-md gap-2 text-lg truncate'
-                            key={v.group + v.dif}
-                        >
-                            {v.img_url && <img src={`${v.img_url}`} height={'32px'} width={'32px'} className='p-0.5' />}
-                            <CopyButton
-                                text={v.group + (v.dif && ' — ' + v.dif)}
-                                prefab={v}
-                                callback={SendPrefab}
-                                className='w-full truncate rounded-md'
-                                key={v.group + v.dif}
-                            />
-                        </div>
-                    )
-                )
-            })}
-        </div>
-    )
-
     return (
         // PAGE
         <div className='flex gap-2 p-2 justify-between items-start bg-solid-med min-h-screen font-normal'>
             <Sidebar />
             {/* PREFABS */}
-            <div className='w-full'>{viewMode ? <GroupView /> : <IndividualView />}</div>
+            <div className='w-full'>
+                {viewMode ? (
+                    <GroupView />
+                ) : (
+                    <IndividualView allPrefabs={GetAllPrefabs()} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
+                )}
+            </div>
         </div>
     )
 }
