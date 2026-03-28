@@ -1,14 +1,15 @@
 import Image from 'next/image'
 import CopyButton from '../components/CopyButton'
 import { Prefab } from './types/Prefab'
+import { PrefabFamily } from './types/PrefabFamily'
 
 type props = {
-    allPrefabs: Prefab[]
+    prefabs: Prefab[]
     SendPrefab: (data: string) => void
     SearchMatch: (data: string) => any
 }
 
-export default function GroupView({ allPrefabs, SendPrefab, SearchMatch }: props) {
+export default function GroupView({ prefabs, SendPrefab, SearchMatch }: props) {
     type GroupCreditProps = {
         uGroup: { group: string }
     }
@@ -19,14 +20,12 @@ export default function GroupView({ allPrefabs, SendPrefab, SearchMatch }: props
     // TODO
     // turn this into a method
     const uniqueGroups = Array.from(
-        new Map(
-            allPrefabs.map((prefab: Prefab) => [prefab.group, { group: prefab.group, img: prefab.img_url }]),
-        ).values(),
+        new Map(prefabs.map((prefab: Prefab) => [prefab.group, { group: prefab.group, img: prefab.img_url }])).values(),
     )
 
     const GroupCredit = ({ uGroup }: GroupCreditProps) => {
         const l = []
-        return allPrefabs.map((pre: Prefab) => {
+        return prefabs.map((pre: Prefab) => {
             if (pre.credit && pre.credit instanceof Array && l.length < 1 && pre.group === uGroup.group) {
                 l.push(pre.credit)
                 return (
@@ -72,7 +71,7 @@ export default function GroupView({ allPrefabs, SendPrefab, SearchMatch }: props
                             <div>
                                 <GroupCredit uGroup={uniqueGroup} />
                                 <div className='flex flex-wrap gap-1.5'>
-                                    {allPrefabs.map((pre: Prefab) => {
+                                    {prefabs.map((pre: Prefab) => {
                                         if (pre.group === uniqueGroup.group) {
                                             return (
                                                 <CopyButton

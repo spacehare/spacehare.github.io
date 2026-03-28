@@ -15,7 +15,6 @@ type props = {
 }
 
 export default function Content({ defaultPrefabsURL }: props) {
-    // const [prefabsData, setPrefabsData] = useState<Array<Prefab> | null>(null)
     const localFallbackURL = '/prefabs - prefabs.tsv'
     const [isLoading, setLoading] = useState(true)
     const ctx = useContext(PrefabContext)
@@ -130,16 +129,15 @@ export default function Content({ defaultPrefabsURL }: props) {
         navigator.clipboard.writeText(output)
     }
 
+    const desiredPrefabs = families.map((family) => (family.active ? family.prefabs : [])).flat()
     return (
-        // PAGE
         <div className='flex gap-2 p-2 justify-between items-start bg-solid-med min-h-screen font-normal'>
             <Sidebar />
-            {/* PREFABS */}
             <div className='w-full'>
                 {viewMode ? (
-                    <GroupView allPrefabs={GetAllPrefabs()} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
+                    <GroupView prefabs={desiredPrefabs} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
                 ) : (
-                    <IndividualView allPrefabs={GetAllPrefabs()} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
+                    <IndividualView allPrefabs={desiredPrefabs} SearchMatch={SearchMatch} SendPrefab={SendPrefab} />
                 )}
             </div>
         </div>
