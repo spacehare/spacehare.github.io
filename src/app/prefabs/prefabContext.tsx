@@ -53,8 +53,8 @@ export function PrefabProvider({ children }: { children: React.ReactNode }) {
             familyMap.get(prefab.family)!.prefabs.push(prefab)
         }
 
-        const families: PrefabFamily[] = Array.from(familyMap.values())
-        setFamilies(families)
+        const newFamilies: PrefabFamily[] = Array.from(familyMap.values())
+        setFamilies([...families, ...newFamilies])
     }
 
     function AddFamily(family: PrefabFamily) {

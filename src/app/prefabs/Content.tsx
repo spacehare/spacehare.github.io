@@ -14,6 +14,23 @@ type props = {
     defaultPrefabsURL: string
 }
 
+function SingleDataToReal(row: PrefabRaw): Prefab {
+    try {
+        const parsed_credit: string[] = row.credit_json_array ? JSON.parse(row.credit_json_array) : null
+        const parsed_entity: string = row.entity_string_json //JSON.parse(row.entity_string_json)
+
+        const output: Prefab = { ...row, entity_string: parsed_entity, credit: parsed_credit }
+        return output
+    } catch (error) {
+        console.error(error)
+        return { ...row, family: 'BAD_DATA', entity_string: '', credit: [] }
+    }
+}
+
+export function AllDataToReal(data: Array<PrefabRaw>): Array<Prefab> {
+    return data.map((raw: PrefabRaw) => SingleDataToReal(raw))
+}
+
 export default function Content({ defaultPrefabsURL }: props) {
     const localFallbackURL = '/prefabs - prefabs.tsv'
     const [isLoading, setLoading] = useState(true)
@@ -28,30 +45,6 @@ export default function Content({ defaultPrefabsURL }: props) {
     const [trimStyle] = ctx.trimStyle
     const [families, setFamilies] = ctx.families
     const MakeFamilies = ctx.MakeFamilies
-
-    function SingleDataToReal(row: PrefabRaw) {
-        const parsed_entity: string = JSON.parse(row.entity_string_json)
-        const parsed_credit: string[] = row.credit_json_array ? JSON.parse(row.credit_json_array) : null
-
-        const output: Prefab = { ...row, entity_string: parsed_entity, credit: parsed_credit }
-        return output
-    }
-
-    function AllDataToReal(data: Array<PrefabRaw>): Array<Prefab> {
-        return data.map((raw: PrefabRaw) => SingleDataToReal(raw))
-    }
-
-    function Parse(text: string, source: string): void {
-        Papa.parse(text, {
-            header: true,
-            skipEmptyLines: true,
-            quoteChar: '',
-            complete: (results) => {
-                MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), source)
-                setLoading(false)
-            },
-        })
-    }
 
     function GetAllPrefabs() {
         return families
@@ -69,7 +62,6 @@ export default function Content({ defaultPrefabsURL }: props) {
                     Papa.parse(text, {
                         header: true,
                         skipEmptyLines: true,
-                        quoteChar: '',
                         complete: (results) => {
                             MakeFamilies(AllDataToReal(results.data as Array<PrefabRaw>), localFallbackURL)
                             setLoading(false)
@@ -87,7 +79,6 @@ export default function Content({ defaultPrefabsURL }: props) {
                 Papa.parse(text, {
                     header: true,
                     skipEmptyLines: true,
-                    quoteChar: '',
                     error: (error: Error) => {
                         console.error(error, '\nFailed to parse, falling back to local URL')
                         loadFallback()
