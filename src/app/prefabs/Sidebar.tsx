@@ -1,3 +1,5 @@
+'use client'
+
 import Wad from '@/app/assets/prefabs/wad.json'
 import { useContext } from 'react'
 import DropDown from '../components/DropDown'
