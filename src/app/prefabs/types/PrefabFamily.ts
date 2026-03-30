@@ -6,4 +6,5 @@ export type PrefabFamily = {
     source: string
     prefabs: Prefab[]
     id: number
+    unremoveable?: boolean
 }

@@ -26,7 +26,7 @@ export function FamiliesPanel({ families }: props) {
 
     return (
         <div>
-            <h1 className='text-center text-xl font-thin'>FAMILIES</h1>
+            <h1 className='text-center text-xl font-thin'>Prefab Families</h1>
             <div>
                 {/* FILE UPLOAD */}
                 <div className='p-3'>
@@ -67,16 +67,19 @@ export function FamiliesPanel({ families }: props) {
                                     }}
                                 />
                                 <div className='truncate'>{family.name}</div>
-                                <button
-                                    className='bg-green-800 py-1 text-left px-3 rounded-md active:brightness-125 hover:brightness-110 ml-auto'
-                                    onClick={(e) => {
-                                        ctx?.RemoveFamily(family)
-                                    }}
-                                >
-                                    remove
-                                </button>
+                                {/* DELETE BUTTON */}
+                                {!family.unremoveable && (
+                                    <button
+                                        className='bg-green-800 text-left px-3 rounded-md active:brightness-125 hover:brightness-110 ml-auto'
+                                        onClick={(e) => {
+                                            ctx?.RemoveFamily(family)
+                                        }}
+                                    >
+                                        remove
+                                    </button>
+                                )}
                             </div>
-                            <div>{family.source}</div>
+                            <div className='text-sm'>source: {family.source}</div>
                         </div>
                     )
                 })}

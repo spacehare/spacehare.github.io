@@ -54,6 +54,7 @@ export function PrefabProvider({ children }: { children: React.ReactNode }) {
         }
 
         const newFamilies: PrefabFamily[] = Array.from(familyMap.values())
+        newFamilies[0].unremoveable = true
         setFamilies([...families, ...newFamilies])
     }
 
