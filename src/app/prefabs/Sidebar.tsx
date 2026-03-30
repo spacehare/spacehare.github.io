@@ -4,6 +4,7 @@ import Wad from '@/app/assets/prefabs/wad.json'
 import { useContext } from 'react'
 import DropDown from '../components/DropDown'
 import { FamiliesPanel } from './FamiliesPanel'
+import HowToUseMdx from './HowToUse.mdx'
 import { PrefabContext } from './prefabContext'
 import SidebarMdx from './sidebar.mdx'
 
@@ -36,7 +37,7 @@ export default function Sidebar() {
 
             {/* SIDEBAR CONTENTS */}
             <div
-                className={`w-72 bg-solid-light h-fit p-3 flex flex-col gap-4 rounded-md rounded-bl-3xl text-lime-100 ${
+                className={`w-72 bg-solid-light h-fit p-3 flex flex-col gap-2.5 rounded-md rounded-bl-3xl text-lime-100 ${
                     !viewSidebar && 'hidden'
                 }`}
             >
@@ -61,6 +62,8 @@ export default function Sidebar() {
                         .*
                     </button>
                 </div>
+
+                <HowToUseMdx />
 
                 {/* VIEW MODE */}
                 <button
@@ -108,7 +111,6 @@ export default function Sidebar() {
 
                 {/* HOW TO */}
                 <div className='font-atkinson flex flex-col gap-3'>
-                    <h1 className='text-2xl text-center font-thin font-atkinson uppercase '>how to use</h1>
                     <SidebarMdx />
                 </div>
             </div>

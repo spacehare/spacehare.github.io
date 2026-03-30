@@ -1,0 +1,31 @@
+<details>
+    <summary className='text-center bg-solid-dark rounded-md mb-1 select-none'>HOW TO USE</summary>
+
+    <div className="bg-solid-dark p-2 rounded-md">
+
+    <center>copying prefabs</center>
+
+    ---
+
+    clicking a button on one of the "cards" will copy that brush or entity to your clipboard!
+
+    <div className='my-2' />
+
+    <center>adding custom prefabs</center>
+
+    ---
+
+    you can locally upload your own prefabs; please see the example spreadsheet first. the entity/brush text needs to be compressed with gzip and then converted to a base64 string.
+
+    <center>technical info</center>
+
+    ---
+
+    with linked groups that need to be unique (ex: radial), their TrenchBroom ID will
+    be set to the unix epoch (seconds since Jan 1, 1970)
+
+    the copy buttons use `onMouseDown` (press) rather than `onClick` (release)
+
+    </div>
+
+</details>
