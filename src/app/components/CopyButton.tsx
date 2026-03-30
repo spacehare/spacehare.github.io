@@ -17,7 +17,7 @@ export default function CopyButton({ text, prefab: obj, callback, className }: P
             key={obj.dif}
             title={label}
             onMouseDown={() => {
-                callback(obj.entity_string)
+                callback(obj.entity)
             }}
         >
             {label}

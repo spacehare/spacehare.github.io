@@ -1,6 +1,8 @@
-import { PrefabRaw } from './PrefabRaw'
-
-export type Prefab = Omit<PrefabRaw, 'entity_string_json' | 'credit_json_array'> & {
-    entity_string: string
-    credit: string[]
+export type Prefab = {
+    family: string
+    group: string
+    dif: string
+    img_url?: string
+    credit?: string[]
+    entity: string
 }

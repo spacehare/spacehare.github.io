@@ -26,15 +26,15 @@ export default function GroupView({ prefabs, SendPrefab, SearchMatch }: props) {
     const GroupCredit = ({ uGroup }: GroupCreditProps) => {
         const l = []
         return prefabs.map((pre: Prefab) => {
-            if (pre.credit && pre.credit instanceof Array && l.length < 1 && pre.group === uGroup.group) {
-                l.push(pre.credit)
+            if (pre.credit_raw && pre.credit_raw instanceof Array && l.length < 1 && pre.group === uGroup.group) {
+                l.push(pre.credit_raw)
                 return (
                     <div
                         className='text-green-700 text-center font-atkinson'
-                        key={pre.credit.toString() + pre.group + pre.family}
+                        key={pre.credit_raw.toString() + pre.group + pre.family}
                     >
                         <span className='font-thin'>Credit: </span>
-                        <span className='text-green-600 font-black'>{pre.credit.join(', ')}</span>
+                        <span className='text-green-600 font-black'>{pre.credit_raw.join(', ')}</span>
                     </div>
                 )
             }

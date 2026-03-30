@@ -1,6 +1,7 @@
 'use client'
 
 import Wad from '@/app/assets/prefabs/wad.json'
+import Pako from 'pako'
 import Papa from 'papaparse'
 import { useContext, useEffect, useState } from 'react'
 import { PrefabContext } from './prefabContext'
@@ -16,14 +17,23 @@ type props = {
 
 function SingleDataToReal(row: PrefabRaw): Prefab {
     try {
-        const parsed_credit: string[] = row.credit_json_array ? JSON.parse(row.credit_json_array) : null
-        const parsed_entity: string = row.entity_string_json //JSON.parse(row.entity_string_json)
+        const parsed_credit: string[] | null = row.credit ? row.credit.split(';') : null
+        const buff = Buffer.from(row.entity, 'base64')
+        const inflated = Pako.inflate(buff, { to: 'string' })
 
-        const output: Prefab = { ...row, entity_string: parsed_entity, credit: parsed_credit }
+        const output: Prefab = {
+            family: row.family,
+            img_url: row.img_url,
+            dif: row.dif,
+            group: row.group,
+            entity: inflated,
+        }
+        if (parsed_credit) output.credit = parsed_credit
+
         return output
     } catch (error) {
         console.error(error)
-        return { ...row, family: 'BAD_DATA', entity_string: '', credit: [] }
+        return { img_url: row.img_url, dif: row.dif, group: row.group, family: 'BAD_DATA', entity: '', credit: [] }
     }
 }
 
@@ -43,7 +53,8 @@ export default function Content({ defaultPrefabsURL }: props) {
     const [prototypeColor] = ctx.prototypeColor
     const [trimColor] = ctx.trimColor
     const [trimStyle] = ctx.trimStyle
-    const [families, setFamilies] = ctx.families
+    const [families] = ctx.families
+    const [, setDefaultURL] = ctx.defaultURL
     const MakeFamilies = ctx.MakeFamilies
 
     function GetAllPrefabs() {
@@ -55,6 +66,7 @@ export default function Content({ defaultPrefabsURL }: props) {
     }
 
     useEffect(() => {
+        setDefaultURL(defaultPrefabsURL)
         function loadFallback() {
             fetch(localFallbackURL)
                 .then((res) => res.text())
@@ -68,12 +80,17 @@ export default function Content({ defaultPrefabsURL }: props) {
                         },
                     })
                 })
+                .catch((error) => {
+                    console.error(error)
+                    setLoading(false)
+                })
         }
 
         fetch(defaultPrefabsURL)
             .then((res) => {
-                if (!res.ok) throw new Error('primary fetch failed, ' + res.status)
-                else return res.text()
+                if (!res.ok) {
+                    throw new Error('primary fetch failed, ' + res.status)
+                } else return res.text()
             })
             .then((text) => {
                 Papa.parse(text, {
@@ -96,8 +113,7 @@ export default function Content({ defaultPrefabsURL }: props) {
     }, [])
 
     if (isLoading) return <div className='flex justify-center items-center h-screen'>Loading</div>
-
-    if (!families) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
+    else if (!families) return <div className='flex justify-center items-center h-screen'>Data failed to load!</div>
 
     const SearchMatch = (val: string) => {
         if (searchRegex) {

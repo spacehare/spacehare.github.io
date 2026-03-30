@@ -11,6 +11,7 @@ type PrefabContextValue = {
     trimColor: [string, Dispatch<SetStateAction<string>>]
     trimStyle: [string, Dispatch<SetStateAction<string>>]
     prototypeColor: [string, Dispatch<SetStateAction<string>>]
+    defaultURL: [string, Dispatch<SetStateAction<string>>]
 
     searchRegex: [boolean, Dispatch<SetStateAction<boolean>>]
     viewMode: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -36,6 +37,7 @@ export function PrefabProvider({ children }: { children: React.ReactNode }) {
     const [prototypeColor, setPrototypeColor] = useState('')
     // const [dataSourceURL, setDataSourceURL] = useState('')
     const [families, setFamilies] = useState<PrefabFamily[]>([])
+    const [defaultURL, setDefaultURL] = useState<string>('')
 
     function MakeFamilies(prefabs: Prefab[], source: string): void {
         const familyMap = new Map<string, PrefabFamily>()
@@ -100,6 +102,7 @@ export function PrefabProvider({ children }: { children: React.ReactNode }) {
         searchRegex: [searchRegex, setSearchRegex],
         viewMode: [viewMode, setViewMode],
         viewSidebar: [viewSidebar, setViewSidebar],
+        defaultURL: [defaultURL, setDefaultURL],
         trimColor: [trimColor, setTrimColor],
         trimStyle: [trimStyle, setTrimStyle],
         prototypeColor: [prototypeColor, setPrototypeColor],
