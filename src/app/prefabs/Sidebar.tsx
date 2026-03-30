@@ -78,7 +78,7 @@ export default function Sidebar() {
                 {/* TODO LOL */}
 
                 {/* DROPDOWNS */}
-                <h1 className='text-center text-xl font-thin capitalize'>clipboard export options</h1>
+                <h1 className='text-center text-xl font-thin capitalize mt-12'>clipboard export options</h1>
                 <div className='gap-2 flex flex-col'>
                     <DropDown
                         getter={trimColor}
@@ -109,8 +109,8 @@ export default function Sidebar() {
                 {/* FAMILIES */}
                 <FamiliesPanel families={families} />
 
-                {/* HOW TO */}
-                <div className='font-atkinson flex flex-col gap-3'>
+                {/* FINAL MDX */}
+                <div className='font-atkinson flex flex-col gap-3 mt-12'>
                     <SidebarMdx />
                 </div>
             </div>

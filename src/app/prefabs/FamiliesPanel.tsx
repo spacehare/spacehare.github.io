@@ -29,7 +29,7 @@ export function FamiliesPanel({ families }: props) {
     return (
         <div>
             {/* HEADER */}
-            <h1 className='text-center text-xl font-thin'>Prefab Families</h1>
+            <h1 className='text-center text-xl font-thin mt-12'>Prefab Families</h1>
 
             {/* EXAMPLE URL */}
             <div className='w-full text-center text-sm'>
@@ -77,7 +77,7 @@ export function FamiliesPanel({ families }: props) {
 
                 {families.map((family) => {
                     return (
-                        <div className='border-solid-dark border p-2 rounded-md' key={family.id}>
+                        <div className='bg-solid-med p-2 rounded-md' key={family.id}>
                             <div className='flex gap-3 w-full items-center justify-start flex-nowrap'>
                                 {/* ACTIVE BUTTON */}
                                 <input
